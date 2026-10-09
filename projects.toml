@@ -85,6 +85,7 @@ repos = [
 [skip."scrapy/frostwork"]
 hatchling = "Rust extension, built with maturin."
 twine-check = "Wheels are built per platform by maturin in CI, where twine check runs on them."
+mypy = "Runs mypy through make py, in CI."
 
 [skip."scrapy/scrapy-agent-plugin"]
 python = "Agent plugin, not a Python package."
