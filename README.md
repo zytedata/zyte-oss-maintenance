@@ -8,9 +8,10 @@ publishing to PyPI through trusted publishing.
 - [`oss_maint/checks/`](oss_maint/checks): the checks, each verifying a
   statement about a project, in groups of related checks (Python versions, packaging,
   linting, …), one module per group.
-- [`REPORT.md`](REPORT.md): the latest report by check. It has a project ×
-  group summary, then per group the statements, a project × check table, and
-  an explanation of every failure.
+- [`REPORT.md`](REPORT.md): the latest report by check. It has the reference
+  data that checks compare projects against, such as the latest Python
+  version, a project × group summary, then per group the statements, a
+  project × check table, and an explanation of every failure.
 - [`PROJECTS.md`](PROJECTS.md): the same results by project, listing only
   what fails (and notes worth reading) in each.
 
@@ -80,6 +81,11 @@ value to show, e.g. the license, or None for "no". They show facts that other
 checks depend on, e.g. `has-sphinx-docs` next to the docs linters, or are
 useful to see in the report.
 
+If a check compares projects against a value that is the same for all of
+them, e.g. the latest release of a tool, add a fact with `@group.fact(label)`
+on a function returning that value as a string. Facts are listed under
+"Reference data" at the start of the report.
+
 To add a group, create a module with `group = Group("id", "Title")` and add
 `group` to `GROUPS` in `oss_maint/checks/__init__.py`, which sets the report
 order. Group and check IDs must be unique together.
@@ -87,7 +93,8 @@ order. Group and check IDs must be unique together.
 Python and PyPy version data (see `oss_maint/pythons.py`) comes from
 [endoflife.date](https://endoflife.date/python) (release and EOL dates),
 [python.org](https://www.python.org/api/v2/downloads/release/) (release
-candidates) and [PyPy's `versions.json`](https://downloads.python.org/pypy/versions.json)
+candidates, and new releases that endoflife.date does not list yet) and
+[PyPy's `versions.json`](https://downloads.python.org/pypy/versions.json)
 (the Python versions of each PyPy release).
 
 ## Development

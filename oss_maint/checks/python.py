@@ -16,6 +16,35 @@ from oss_maint.core import (
 group = Group("python", "Python versions")
 
 
+@group.fact("Latest Python")
+def latest_python_version() -> str:
+    return pythons.latest_python().version
+
+
+@group.fact("Upcoming Python, with a release candidate")
+def upcoming_python_version() -> str:
+    return pythons.upcoming_python() or "none"
+
+
+@group.fact("Supported Python versions, with EOL dates")
+def supported_python_versions() -> str:
+    return ", ".join(
+        f"{c.version} ({c.eol_date or 'unknown'})"
+        for c in pythons.python_cycles()
+        if c.released and not c.eol
+    )
+
+
+@group.fact("Python versions of the latest PyPy release")
+def pypy_python_versions() -> str:
+    return ", ".join(pythons.pypy_versions().supported)
+
+
+@group.fact("End-of-life PyPy Python versions")
+def eol_pypy_python_versions() -> str:
+    return ", ".join(pythons.pypy_versions().eol) or "none"
+
+
 @group.check("Support for end-of-life Python versions is dropped.")
 def no_eol_python(repo: Repo) -> Result:
     requires_python = repo.requires_python

@@ -111,6 +111,10 @@ def main(argv: list[str] | None = None) -> int:
         width = max(len(p.name) for p in projects)
         for group in groups:
             print(f"\n# {group.title}")
+            if group.facts:
+                print()
+            for fact in group.facts:
+                print(f"{fact.label}: {fact.run()}")
             for check in group.checks:
                 print(f"\n{check.id}: {check.statement}")
                 for project in projects:

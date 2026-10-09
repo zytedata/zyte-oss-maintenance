@@ -7,7 +7,7 @@ import pytest
 
 from oss_maint import pythons
 from oss_maint.checks import GROUPS, select_groups
-from oss_maint.core import PYPY_CLASSIFIER, Repo, Result, Status, tally
+from oss_maint.core import PYPY_CLASSIFIER, Fact, Repo, Result, Status, tally
 
 if TYPE_CHECKING:
     from collections.abc import Callable
@@ -37,6 +37,23 @@ def test_every_check_has_a_statement() -> None:
     assert CHECKS
     for check in CHECKS.values():
         assert check.statement.endswith(".")
+
+
+def test_facts() -> None:
+    facts = {f.label: f.run() for g in GROUPS for f in g.facts}
+    assert facts == {
+        "Latest Python": "3.11",
+        "Upcoming Python, with a release candidate": "3.12",
+        "Supported Python versions, with EOL dates": "3.10 (2099-10-31), 3.11 (2099-10-31)",
+        "Python versions of the latest PyPy release": "3.10, 3.11",
+        "End-of-life PyPy Python versions": "3.9",
+        "Latest sphinx-scrapy": "0.13.0",
+    }
+
+
+def test_fact_error() -> None:
+    fact = Fact("Broken", lambda: str(1 / 0))
+    assert fact.run() == "error: ZeroDivisionError: division by zero"
 
 
 def test_select_groups() -> None:

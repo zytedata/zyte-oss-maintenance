@@ -101,6 +101,7 @@ def render_report(
         ),
         "",
         LEGEND,
+        *_render_facts(groups),
         "",
         "## Summary",
         "",
@@ -129,6 +130,20 @@ def render_report(
     for group in groups:
         lines += _render_group(group, project_groups, projects)
     return "\n".join(lines) + "\n"
+
+
+def _render_facts(groups: list[Group]) -> list[str]:
+    facts = [fact for group in groups for fact in group.facts]
+    if not facts:
+        return []
+    return [
+        "",
+        "## Reference data",
+        "",
+        "Values that checks compare projects against.",
+        "",
+        *(f"- {fact.label}: {fact.run()}" for fact in facts),
+    ]
 
 
 def _render_group(
