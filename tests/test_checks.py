@@ -623,3 +623,54 @@ def test_pylint(make_repo: MakeRepo) -> None:
     )
     repo = make_repo({"tox.ini": "[testenv:pylint]\ncommands = pylint src\n"})
     assert run("pylint", repo).status is Status.YES
+
+
+SPHINX_SCRAPY_FILES = {
+    "docs/conf.py": 'extensions = ["sphinx_scrapy"]\n',
+    "tox.ini": "[tox]\nrequires =\n    sphinx-scrapy[tox]==0.13.0\n",
+    "docs/requirements.in": (
+        "sphinx-scrapy @ git+https://github.com/scrapy/sphinx-scrapy.git@0.13.0\n"
+    ),
+    ".pre-commit-config.yaml": """\
+        repos:
+        - repo: https://github.com/scrapy/sphinx-scrapy
+          rev: 0.13.0
+          hooks:
+          - id: sphinx-scrapy
+    """,
+}
+
+
+def test_sphinx_scrapy(make_repo: MakeRepo) -> None:
+    assert run("sphinx-scrapy", make_repo({})).status is Status.NA
+    repo = make_repo({"docs/conf.py": "extensions = []\n"})
+    assert run("sphinx-scrapy", repo).status is Status.FAIL
+    assert run("sphinx-scrapy-pins", repo).status is Status.NA
+    assert run("docs-requirements-in", repo).status is Status.FAIL
+    repo = make_repo(SPHINX_SCRAPY_FILES)
+    for check_id in (
+        "docs-requirements-in",
+        "sphinx-scrapy",
+        "sphinx-scrapy-pins",
+        "sphinx-scrapy-latest",
+    ):
+        assert run(check_id, repo).status is Status.PASS
+
+
+def test_sphinx_scrapy_pins(make_repo: MakeRepo) -> None:
+    repo = make_repo(
+        {
+            **SPHINX_SCRAPY_FILES,
+            "tox.ini": "[tox]\n",
+            "docs/requirements.in": "sphinx-scrapy==0.8.4\n",
+        }
+    )
+    result = run("sphinx-scrapy-pins", repo)
+    assert result.status is Status.FAIL
+    assert result.detail == (
+        "not pinned in tox; different pins: 0.8.4 in docs/requirements.in, "
+        "0.13.0 in .pre-commit-config.yaml"
+    )
+    result = run("sphinx-scrapy-latest", repo)
+    assert result.status is Status.FAIL
+    assert result.detail == "pinned to 0.8.4, latest is 0.13.0"

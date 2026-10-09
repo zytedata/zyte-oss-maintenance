@@ -5,6 +5,7 @@ from datetime import date
 import pytest
 
 from oss_maint import pythons
+from oss_maint.checks import docs
 
 
 @pytest.fixture(autouse=True)
@@ -29,3 +30,4 @@ def fake_python_cycles(monkeypatch: pytest.MonkeyPatch) -> None:
         "pypy_versions",
         lambda: pythons.PyPyVersions(supported=["3.10", "3.11"], eol=["3.9"]),
     )
+    monkeypatch.setattr(docs, "latest_sphinx_scrapy", lambda: "0.13.0")
