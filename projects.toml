@@ -1,0 +1,74 @@
+# Projects to check, as GitHub "owner/name", in groups. The report shows groups
+# and the projects in them in this order.
+#
+# Groups other than "Others" were initially filled on 2026-10-09 with their
+# main projects and the dependencies of those (including scrapy-zyte-api's
+# "provider" extra) not in earlier groups. Move projects between groups freely.
+
+[[groups]]
+title = "Scrapy and its deps"
+repos = [
+    "scrapy/scrapy",
+    "scrapy/cssselect",
+    "scrapy/formerly",
+    "scrapy/itemadapter",
+    "scrapy/itemloaders",
+    "scrapy/parsel",
+    "scrapy/protego",
+    "scrapy/queuelib",
+    "scrapy/w3lib",
+    "scrapy/sphinx-scrapy",
+]
+
+[[groups]]
+title = "scrapy-poet and its deps"
+repos = [
+    "scrapinghub/scrapy-poet",
+    "scrapinghub/andi",
+    "scrapinghub/web-poet",
+    "zytedata/url-matcher",
+]
+
+[[groups]]
+title = "Zyte API"
+repos = [
+    "scrapy-plugins/scrapy-zyte-api",
+    "zytedata/python-zyte-api",
+    "scrapy-plugins/scrapy-zyte-smartproxy",
+    "zytedata/zyte-common-items",
+    "zytedata/zyte-parsers",
+    "zytedata/clear-html",
+    "zytedata/html-text",
+    "scrapinghub/price-parser",
+]
+
+[[groups]]
+title = "Scrapy Cloud"
+repos = [
+    "scrapinghub/python-scrapinghub",
+    "scrapinghub/shub",
+    "scrapinghub/scrapinghub-entrypoint-scrapy",
+]
+
+[[groups]]
+title = "Others"
+repos = [
+    "scrapy/form2request",
+    "scrapy/scrapy-lint",
+    "scrapy/scrapy-mcp-official",
+    "scrapy/xtractmime",
+    "scrapy-plugins/scrapy-download-handlers-incubator",
+    "scrapy-plugins/scrapy-playwright",
+    "scrapy-plugins/scrapy-spider-metadata",
+    "scrapinghub/dateparser",
+    "scrapinghub/extruct",
+    "scrapinghub/scrapyrt",
+    "scrapinghub/spidermon",
+    "zytedata/duplicate-url-discarder",
+]
+
+# Checks that do not apply to a project, with the reason. They are reported as
+# "not applicable" instead of being run:
+#
+# [skip."owner/name"]
+# check-id = "Reason."

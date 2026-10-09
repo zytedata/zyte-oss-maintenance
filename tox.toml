@@ -1,0 +1,15 @@
+requires = ["tox>=4.25"]
+env_list = ["py", "pre-commit", "pyrefly"]
+
+[env_run_base]
+dependency_groups = ["tests"]
+commands = [["pytest", { replace = "posargs", extend = true }]]
+
+[env.pre-commit]
+skip_install = true
+dependency_groups = ["pre-commit"]
+commands = [["pre-commit", "run", "--all-files", "--show-diff-on-failure"]]
+
+[env.pyrefly]
+dependency_groups = ["tests", "typing"]
+commands = [["pyrefly", "check", { replace = "posargs", extend = true }]]

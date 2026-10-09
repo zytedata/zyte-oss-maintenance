@@ -1,0 +1,148 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "oss-maint"
+version = "0"
+description = "Track which of our open-source Python projects are up to date with maintenance practices."
+requires-python = ">=3.14"
+license = "Apache-2.0"
+authors = [{ name = "Zyte Group Ltd", email = "opensource@zyte.com" }]
+dependencies = [
+    "packaging>=24.2",
+    "pyyaml",
+]
+
+[project.scripts]
+oss-maint = "oss_maint.cli:main"
+
+[dependency-groups]
+tests = [
+    "pytest>=9",
+]
+pre-commit = [
+    "pre-commit>=4.6.2",
+]
+typing = [
+    "pyrefly>=1.3.2",
+    "types-PyYAML>=6.0.12.20260906",
+]
+dev = [
+    { include-group = "tests" },
+    { include-group = "pre-commit" },
+    { include-group = "typing" },
+    "ruff>=0.16.10",
+    "tox>=4.25",
+    "tox-uv",
+]
+
+[tool.pyrefly]
+project-includes = [
+    "oss_maint",
+    "tests",
+]
+preset = "strict"
+
+[tool.ruff.lint]
+extend-select = [
+    # flake8-builtins
+    "A",
+    # flake8-async
+    "ASYNC",
+    # flake8-bugbear
+    "B",
+    # flake8-comprehensions
+    "C4",
+    # flake8-commas
+    "COM",
+    # pycodestyle
+    "E4",
+    "E7",
+    "E9",
+    # Pyflakes
+    "F",
+    # flake8-future-annotations
+    "FA",
+    # flynt
+    "FLY",
+    # refurb
+    "FURB",
+    # isort
+    "I",
+    # flake8-implicit-str-concat
+    "ISC",
+    # flake8-logging
+    "LOG",
+    # Perflint
+    "PERF",
+    # pygrep-hooks
+    "PGH",
+    # flake8-pie
+    "PIE",
+    # pylint
+    "PL",
+    # flake8-pytest-style
+    "PT",
+    # flake8-use-pathlib
+    "PTH",
+    # flake8-pyi
+    "PYI",
+    # flake8-quotes
+    "Q",
+    # flake8-return
+    "RET",
+    # flake8-raise
+    "RSE",
+    # Ruff-specific rules
+    "RUF",
+    # flake8-bandit
+    "S",
+    # flake8-simplify
+    "SIM",
+    # flake8-slots
+    "SLOT",
+    # flake8-debugger
+    "T10",
+    # flake8-type-checking
+    "TC",
+    # flake8-tidy-imports
+    "TID",
+    # pyupgrade
+    "UP",
+    # pycodestyle warnings
+    "W",
+    # flake8-2020
+    "YTT",
+]
+ignore = [
+    # Do not catch blind exception
+    "BLE001",
+    # Trailing comma missing
+    "COM812",
+    # Too many return statements
+    "PLR0911",
+    # Too many branches
+    "PLR0912",
+    # Too many arguments in function definition
+    "PLR0913",
+    # Too many positional arguments
+    "PLR0917",
+    # String contains ambiguous {}.
+    "RUF001",
+    # Docstring contains ambiguous {}.
+    "RUF002",
+    # Comment contains ambiguous {}.
+    "RUF003",
+    # Use of `assert` detected
+    "S101",
+    # `subprocess` call: check for execution of untrusted input
+    "S603",
+    # Starting a process with a partial executable path
+    "S607",
+    # Yoda condition detected
+    "SIM300",
+]
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
