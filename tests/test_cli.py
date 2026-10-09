@@ -35,6 +35,8 @@ def test_report(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert main([*args, "report", "--no-sync", "-d", str(tmp_path)]) == 0
 
     report = (tmp_path / "REPORT.md").read_text(encoding="utf-8")
+    assert "- Latest Python: 3.11\n" in report
+    assert report.index("## Reference data") < report.index("## Summary")
     assert (
         "| [`hatchling`](#hatchling) | The build backend is hatchling. | 1/2 passing |"
         in report

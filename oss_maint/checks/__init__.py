@@ -19,6 +19,10 @@ whether their statement is true, and are reported as "yes" or "no" rather
 than passing or failing. They show facts that other checks depend on, such as
 whether a project has docs.
 
+Facts, added with the group's ``fact`` decorator, return values that checks
+compare projects against, such as the latest Python version. They are
+reported once, at the start of the report.
+
 Groups are reported in the order of :data:`GROUPS`, and checks in the order in
 which they are defined.
 """

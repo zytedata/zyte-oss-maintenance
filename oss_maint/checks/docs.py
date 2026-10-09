@@ -24,6 +24,11 @@ def latest_sphinx_scrapy() -> str:
     return pythons._get_json(SPHINX_SCRAPY_PYPI_URL)["info"]["version"]
 
 
+@group.fact("Latest sphinx-scrapy")
+def latest_sphinx_scrapy_version() -> str:
+    return latest_sphinx_scrapy()
+
+
 def _uses_sphinx_scrapy(repo: Repo) -> bool:
     return "sphinx_scrapy" in (
         repo.read_text("docs/conf.py") or ""

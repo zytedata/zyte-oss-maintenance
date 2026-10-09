@@ -19,6 +19,7 @@ if TYPE_CHECKING:
 
     CheckFunc = Callable[["Repo"], "Result"]
     InfoFunc = Callable[["Repo"], bool | str | None]
+    FactFunc = Callable[[], str]
 
 
 class Status(Enum):
@@ -91,6 +92,22 @@ class Check:
             return Result(Status.ERROR, f"{type(e).__name__}: {e}")
 
 
+@dataclass(frozen=True)
+class Fact:
+    """A value that checks compare projects against, e.g. the latest Python
+    version, reported once rather than per project."""
+
+    #: What the value is, e.g. "Latest Python".
+    label: str
+    func: FactFunc
+
+    def run(self) -> str:
+        try:
+            return self.func()
+        except Exception as e:
+            return f"error: {type(e).__name__}: {e}"
+
+
 @dataclass
 class Group:
     """Related checks, reported together."""
@@ -98,6 +115,7 @@ class Group:
     id: str
     title: str
     checks: list[Check] = field(default_factory=list)
+    facts: list[Fact] = field(default_factory=list)
 
     def check(self, statement: str) -> Callable[[CheckFunc], CheckFunc]:
         """Decorator that adds a check function to the group."""
@@ -123,6 +141,16 @@ class Group:
             self.checks.append(
                 Check(_check_id(func), statement, run, informational=True)
             )
+            return func
+
+        return decorator
+
+    def fact(self, label: str) -> Callable[[FactFunc], FactFunc]:
+        """Decorator that adds a fact, a function returning the value that
+        *label* describes, to the group."""
+
+        def decorator(func: FactFunc) -> FactFunc:
+            self.facts.append(Fact(label, func))
             return func
 
         return decorator
