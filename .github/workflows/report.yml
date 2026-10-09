@@ -1,0 +1,49 @@
+name: Update the report
+
+on:
+  schedule:
+  - cron: "0 6 * * 1"  # Mondays at 06:00 UTC.
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  report:
+    name: Update the report
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # To push the updated report.
+
+    steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      with:
+        persist-credentials: false
+
+    - name: Set up Python
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+      with:
+        python-version: "3.14"
+
+    - name: Install
+      run: pip install -e .
+
+    - name: Generate the report
+      run: oss-maint report
+
+    - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ github.token }}
+      run: |
+        # Changes to the generation date alone are not worth a commit.
+        if git diff --quiet --ignore-matching-lines='^Generated on ' -- REPORT.md PROJECTS.md; then
+          echo "No changes to the report."
+          exit 0
+        fi
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git commit --quiet --message "Update the report" -- REPORT.md PROJECTS.md
+        git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:${GITHUB_REF_NAME}"
