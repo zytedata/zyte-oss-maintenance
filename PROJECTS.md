@@ -6,7 +6,7 @@ Generated on 2026-10-09 with `oss-maint report`. Do not edit by hand. Lists fail
 
 ### scrapy/scrapy
 
-[Repository](https://github.com/scrapy/scrapy) · commit [`11fba8b`](https://github.com/scrapy/scrapy/commit/11fba8b4cc5729e7906502ef542da260af5be5d4) · 28/32 checks passing
+[Repository](https://github.com/scrapy/scrapy) · commit [`be7bdc4`](https://github.com/scrapy/scrapy/commit/be7bdc4cd16644018fa56ef3503dce86744fa6d5) · 28/32 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -28,13 +28,15 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 ### scrapy/cssselect
 
-[Repository](https://github.com/scrapy/cssselect) · commit [`d1f8b2a`](https://github.com/scrapy/cssselect/commit/d1f8b2a771a6976efea0038ac3e9b8efb85cfef7) · 22/28 checks passing
+[Repository](https://github.com/scrapy/cssselect) · commit [`d1f8b2a`](https://github.com/scrapy/cssselect/commit/d1f8b2a771a6976efea0038ac3e9b8efb85cfef7) · 20/28 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Typing**
@@ -52,13 +54,15 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 ### scrapy/formerly
 
-[Repository](https://github.com/scrapy/formerly) · commit [`1286733`](https://github.com/scrapy/formerly/commit/1286733c171d2138bc6dcb59b49ee4df5228fd40) · 20/24 checks passing
+[Repository](https://github.com/scrapy/formerly) · commit [`1286733`](https://github.com/scrapy/formerly/commit/1286733c171d2138bc6dcb59b49ee4df5228fd40) · 18/24 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Typing**
@@ -94,13 +98,15 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: n
 
 ### scrapy/itemloaders
 
-[Repository](https://github.com/scrapy/itemloaders) · commit [`f3e6800`](https://github.com/scrapy/itemloaders/commit/f3e680016d0fd49f24a656f440938ec14c0cd9db) · 22/30 checks passing
+[Repository](https://github.com/scrapy/itemloaders) · commit [`f3e6800`](https://github.com/scrapy/itemloaders/commit/f3e680016d0fd49f24a656f440938ec14c0cd9db) · 20/30 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Typing**
@@ -195,13 +201,15 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 ### scrapy/sphinx-scrapy
 
-[Repository](https://github.com/scrapy/sphinx-scrapy) · commit [`52f1427`](https://github.com/scrapy/sphinx-scrapy/commit/52f14275a06d15b7de3b6ecadacbd7ff46ac4764) · 14/23 checks passing
+[Repository](https://github.com/scrapy/sphinx-scrapy) · commit [`52f1427`](https://github.com/scrapy/sphinx-scrapy/commit/52f14275a06d15b7de3b6ecadacbd7ff46ac4764) · 12/23 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -262,9 +270,14 @@ supports-pypy: no · license: MIT · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/scrapy-poet
 
-[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`261e297`](https://github.com/scrapinghub/scrapy-poet/commit/261e297ce06c5b1687c6560c84b4e934d6cdcb74) · 23/30 checks passing
+[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`261e297`](https://github.com/scrapinghub/scrapy-poet/commit/261e297ce06c5b1687c6560c84b4e934d6cdcb74) · 21/30 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
+
+**Python versions**
+
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -307,13 +320,15 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/web-poet
 
-[Repository](https://github.com/scrapinghub/web-poet) · commit [`b3cc347`](https://github.com/scrapinghub/web-poet/commit/b3cc347952b9bc6cf534e44543b789d2f5f2fafb) · 21/30 checks passing
+[Repository](https://github.com/scrapinghub/web-poet) · commit [`b3cc347`](https://github.com/scrapinghub/web-poet/commit/b3cc347952b9bc6cf534e44543b789d2f5f2fafb) · 19/30 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -343,13 +358,15 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/url-matcher
 
-[Repository](https://github.com/zytedata/url-matcher) · commit [`b55ff5c`](https://github.com/zytedata/url-matcher/commit/b55ff5cc14b3346be16edf9e6faa603ebdfbf216) · 28/30 checks passing
+[Repository](https://github.com/zytedata/url-matcher) · commit [`b55ff5c`](https://github.com/zytedata/url-matcher/commit/b55ff5cc14b3346be16edf9e6faa603ebdfbf216) · 26/30 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Typing**
 
@@ -417,8 +434,8 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 
 **Packaging**
 
@@ -454,9 +471,14 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/zyte-common-items
 
-[Repository](https://github.com/zytedata/zyte-common-items) · commit [`1309123`](https://github.com/zytedata/zyte-common-items/commit/13091232ca4eb0b260a45c68f90a0e42d521d811) · 18/30 checks passing
+[Repository](https://github.com/zytedata/zyte-common-items) · commit [`1309123`](https://github.com/zytedata/zyte-common-items/commit/13091232ca4eb0b260a45c68f90a0e42d521d811) · 16/30 checks passing
 
 supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
+
+**Python versions**
+
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -490,13 +512,15 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/zyte-parsers
 
-[Repository](https://github.com/zytedata/zyte-parsers) · commit [`4f5d08d`](https://github.com/zytedata/zyte-parsers/commit/4f5d08d1be951fa438f0aedd598d61a61c360ea0) · 22/28 checks passing
+[Repository](https://github.com/zytedata/zyte-parsers) · commit [`4f5d08d`](https://github.com/zytedata/zyte-parsers/commit/4f5d08d1be951fa438f0aedd598d61a61c360ea0) · 20/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Dependencies**
 
@@ -514,13 +538,15 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/clear-html
 
-[Repository](https://github.com/zytedata/clear-html) · commit [`6b820b1`](https://github.com/zytedata/clear-html/commit/6b820b13221145ceb0814e47e9583e5574d28865) · 22/24 checks passing
+[Repository](https://github.com/zytedata/clear-html) · commit [`6b820b1`](https://github.com/zytedata/clear-html/commit/6b820b13221145ceb0814e47e9583e5574d28865) · 20/24 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Typing**
 
@@ -528,13 +554,15 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 ### zytedata/html-text
 
-[Repository](https://github.com/zytedata/html-text) · commit [`2dc4e94`](https://github.com/zytedata/html-text/commit/2dc4e94dd92a8b15476a237f0a1693b051f53d6f) · 15/24 checks passing
+[Repository](https://github.com/zytedata/html-text) · commit [`2dc4e94`](https://github.com/zytedata/html-text/commit/2dc4e94dd92a8b15476a237f0a1693b051f53d6f) · 13/24 checks passing
 
 supports-pypy: no · license: MIT · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.9' allows 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.9, 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Dependencies**
 
@@ -561,13 +589,15 @@ supports-pypy: no · license: MIT · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/price-parser
 
-[Repository](https://github.com/scrapinghub/price-parser) · commit [`6718bfe`](https://github.com/scrapinghub/price-parser/commit/6718bfe8447f2de17ecc152d3ad2a4c51520c755) · 16/24 checks passing
+[Repository](https://github.com/scrapinghub/price-parser) · commit [`6718bfe`](https://github.com/scrapinghub/price-parser/commit/6718bfe8447f2de17ecc152d3ad2a4c51520c755) · 14/24 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.9' allows 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.9, 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -605,8 +635,8 @@ supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Packaging**
@@ -643,13 +673,15 @@ supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 ### scrapinghub/shub
 
-[Repository](https://github.com/scrapinghub/shub) · commit [`80a4cad`](https://github.com/scrapinghub/shub/commit/80a4cad661f2a669739c8c3805fd33c67e62674e) · 12/28 checks passing
+[Repository](https://github.com/scrapinghub/shub) · commit [`80a4cad`](https://github.com/scrapinghub/shub/commit/80a4cad661f2a669739c8c3805fd33c67e62674e) · 10/28 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -696,8 +728,8 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 
 **Packaging**
 
@@ -734,13 +766,15 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 
 ### scrapy/form2request
 
-[Repository](https://github.com/scrapy/form2request) · commit [`a251597`](https://github.com/scrapy/form2request/commit/a251597d9fa44cbd03736ec1da37f85593dfe820) · 23/28 checks passing
+[Repository](https://github.com/scrapy/form2request) · commit [`a251597`](https://github.com/scrapy/form2request/commit/a251597d9fa44cbd03736ec1da37f85593dfe820) · 21/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -757,7 +791,7 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 ### scrapy/frostwork
 
-[Repository](https://github.com/scrapy/frostwork) · commit [`d8ef1a1`](https://github.com/scrapy/frostwork/commit/d8ef1a1b7bcb76a60821bf13fe7d19e224bc01a9) · 13/21 checks passing
+[Repository](https://github.com/scrapy/frostwork) · commit [`d8ef1a1`](https://github.com/scrapy/frostwork/commit/d8ef1a1b7bcb76a60821bf13fe7d19e224bc01a9) · 13/20 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
@@ -772,7 +806,6 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 **Typing**
 
 - ❌ [`typed-classifier`](REPORT.md#typed-classifier): no 'Typing :: Typed' classifier
-- ❌ [`mypy`](REPORT.md#mypy): mypy not found
 
 **Tests and coverage**
 
@@ -794,13 +827,15 @@ All applicable checks pass.
 
 ### scrapy/scrapy-lint
 
-[Repository](https://github.com/scrapy/scrapy-lint) · commit [`30a3872`](https://github.com/scrapy/scrapy-lint/commit/30a387279f0be38a48237d31725b1d52a2bcf297) · 20/29 checks passing
+[Repository](https://github.com/scrapy/scrapy-lint) · commit [`30a3872`](https://github.com/scrapy/scrapy-lint/commit/30a387279f0be38a48237d31725b1d52a2bcf297) · 18/29 checks passing
 
 supports-pypy: no · license: MIT · pylint: yes · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Typing**
 
@@ -849,13 +884,15 @@ All applicable checks pass.
 
 ### scrapy/xtractmime
 
-[Repository](https://github.com/scrapy/xtractmime) · commit [`9d50fcb`](https://github.com/scrapy/xtractmime/commit/9d50fcb0d7abd7a96f7dee746d9285faba4af6db) · 17/23 checks passing
+[Repository](https://github.com/scrapy/xtractmime) · commit [`9d50fcb`](https://github.com/scrapy/xtractmime/commit/9d50fcb0d7abd7a96f7dee746d9285faba4af6db) · 15/23 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Typing**
@@ -880,13 +917,15 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 ### scrapy-plugins/scrapy-playwright
 
-[Repository](https://github.com/scrapy-plugins/scrapy-playwright) · commit [`d99f38d`](https://github.com/scrapy-plugins/scrapy-playwright/commit/d99f38d3483118881add4e2bcbc595d45091f196) · 10/23 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-playwright) · commit [`d99f38d`](https://github.com/scrapy-plugins/scrapy-playwright/commit/d99f38d3483118881add4e2bcbc595d45091f196) · 8/23 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -924,8 +963,8 @@ supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.9' allows 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.9, 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 - ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
 
 **Packaging**
@@ -967,7 +1006,7 @@ supports-pypy: no · license: no · pylint: no · has-sphinx-docs: no
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python is not declared
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
 
 **Packaging**
 
@@ -1004,13 +1043,15 @@ supports-pypy: no · license: no · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/dateparser
 
-[Repository](https://github.com/scrapinghub/dateparser) · commit [`fed9cf9`](https://github.com/scrapinghub/dateparser/commit/fed9cf94e9d8a1128b396f01ca66f4a303f03ee4) · 15/27 checks passing
+[Repository](https://github.com/scrapinghub/dateparser) · commit [`fed9cf9`](https://github.com/scrapinghub/dateparser/commit/fed9cf94e9d8a1128b396f01ca66f4a303f03ee4) · 13/27 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -1050,8 +1091,8 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.8' allows 3.8 (EOL 2024-10-07), 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.8, 3.9, 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.13, 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.13, 3.14, 3.15
 
 **Packaging**
 
@@ -1092,7 +1133,7 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python is not declared
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
 
 **Packaging**
 
@@ -1134,8 +1175,8 @@ supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: ye
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.9' allows 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.9, 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 
 **Typing**
 
@@ -1166,13 +1207,15 @@ supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: ye
 
 ### scrapinghub/spidermon
 
-[Repository](https://github.com/scrapinghub/spidermon) · commit [`4b9a8ff`](https://github.com/scrapinghub/spidermon/commit/4b9a8ffe16c30a0f61461f1570055c1b8dfded72) · 18/27 checks passing
+[Repository](https://github.com/scrapinghub/spidermon) · commit [`4b9a8ff`](https://github.com/scrapinghub/spidermon/commit/4b9a8ffe16c30a0f61461f1570055c1b8dfded72) · 16/27 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -1202,13 +1245,15 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/agent-exam
 
-[Repository](https://github.com/zytedata/agent-exam) · commit [`c88fec1`](https://github.com/zytedata/agent-exam/commit/c88fec170ff9683dad9d769601206088fdbaeb7d) · 19/28 checks passing
+[Repository](https://github.com/zytedata/agent-exam) · commit [`c88fec1`](https://github.com/zytedata/agent-exam/commit/c88fec170ff9683dad9d769601206088fdbaeb7d) · 17/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -1235,13 +1280,15 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/claude-measure-usage
 
-[Repository](https://github.com/zytedata/claude-measure-usage) · commit [`6b4310a`](https://github.com/zytedata/claude-measure-usage/commit/6b4310afeaf2e9c81acd861f8d9bd62006357bf7) · 14/22 checks passing
+[Repository](https://github.com/zytedata/claude-measure-usage) · commit [`6b4310a`](https://github.com/zytedata/claude-measure-usage/commit/6b4310afeaf2e9c81acd861f8d9bd62006357bf7) · 12/22 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
 
 **Packaging**
 
@@ -1271,8 +1318,8 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 **Python versions**
 
 - ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.9' allows 3.9 (EOL 2025-10-31), 3.10 (EOL 2026-10-01); classifiers list 3.9, 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 
 **Packaging**
 
@@ -1308,8 +1355,8 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 **Python versions**
 
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.14' classifier; 3.14 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14
+- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
+- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.14, 3.15
 
 **Packaging**
 
