@@ -18,6 +18,7 @@ repos = [
     "scrapy/queuelib",
     "scrapy/w3lib",
     "scrapy/sphinx-scrapy",
+    "scrapy/sphinx-llm-friendly",
 ]
 
 [[groups]]
@@ -54,17 +55,25 @@ repos = [
 title = "Others"
 repos = [
     "scrapy/form2request",
+    "scrapy/frostwork",
+    "scrapy/scrapy-agent-plugin",
     "scrapy/scrapy-lint",
     "scrapy/scrapy-mcp-official",
+    "scrapy/unattended-pr-guard",
     "scrapy/xtractmime",
     "scrapy-plugins/scrapy-download-handlers-incubator",
     "scrapy-plugins/scrapy-playwright",
     "scrapy-plugins/scrapy-spider-metadata",
+    "scrapy-plugins/zyte-spidermon",
     "scrapinghub/dateparser",
     "scrapinghub/extruct",
+    "scrapinghub/number-parser",
     "scrapinghub/scrapyrt",
     "scrapinghub/spidermon",
+    "zytedata/agent-exam",
+    "zytedata/claude-measure-usage",
     "zytedata/duplicate-url-discarder",
+    "zytedata/harness-run",
 ]
 
 # Checks that do not apply to a project, with the reason. They are reported as
@@ -72,3 +81,31 @@ repos = [
 #
 # [skip."owner/name"]
 # check-id = "Reason."
+
+[skip."scrapy/frostwork"]
+hatchling = "Rust extension, built with maturin."
+twine-check = "Wheels are built per platform by maturin in CI, where twine check runs on them."
+
+[skip."scrapy/scrapy-agent-plugin"]
+python = "Agent plugin, not a Python package."
+packaging = "Agent plugin, not a Python package."
+dependencies = "Agent plugin, not a Python package."
+typing = "Agent plugin, not a Python package."
+tests = "Agent plugin, has no code to test."
+ruff = "Agent plugin, has no Python code."
+pylint = "Agent plugin, has no Python code."
+trusted-publishing = "Agent plugin, not published to PyPI."
+publish-on-tag = "Agent plugin, not published to PyPI."
+separate-build-job = "Agent plugin, not published to PyPI."
+
+[skip."scrapy/unattended-pr-guard"]
+python = "JavaScript GitHub Action."
+packaging = "JavaScript GitHub Action."
+dependencies = "JavaScript GitHub Action."
+typing = "JavaScript GitHub Action."
+tests = "JavaScript GitHub Action."
+ruff = "JavaScript GitHub Action."
+pylint = "JavaScript GitHub Action."
+trusted-publishing = "GitHub Action, not published to PyPI."
+publish-on-tag = "GitHub Action, not published to PyPI."
+separate-build-job = "GitHub Action, not published to PyPI."
