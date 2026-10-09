@@ -1,0 +1,11 @@
+# Local mirror of the CI secrets gate so contributors catch secrets before they
+# push. The authoritative enforcement is the org ruleset + central workflow.
+minimum_pre_commit_version: "4.0.0"
+
+repos:
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]
+        exclude: ^\.secrets\.baseline$

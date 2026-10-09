@@ -1,0 +1,9 @@
+LICENSE PLACEHOLDER
+
+Replace this file with your chosen license before the repository is used.
+
+For public repositories the portal applies a license at creation time
+(MIT / Apache-2.0 / BSD-3-Clause). For private/internal repositories, add the
+appropriate Zyte proprietary notice here, e.g.:
+
+    Copyright (c) {{YEAR}} Zyte Group Limited. All rights reserved.
