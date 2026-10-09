@@ -6,7 +6,7 @@ Generated on 2026-10-09 with `oss-maint report`. Do not edit by hand. Lists fail
 
 ### scrapy/scrapy
 
-[Repository](https://github.com/scrapy/scrapy) · commit [`11fba8b`](https://github.com/scrapy/scrapy/commit/11fba8b4cc5729e7906502ef542da260af5be5d4) · 24/28 checks passing
+[Repository](https://github.com/scrapy/scrapy) · commit [`11fba8b`](https://github.com/scrapy/scrapy/commit/11fba8b4cc5729e7906502ef542da260af5be5d4) · 28/32 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -28,7 +28,7 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 ### scrapy/cssselect
 
-[Repository](https://github.com/scrapy/cssselect) · commit [`c6748f1`](https://github.com/scrapy/cssselect/commit/c6748f1d80c4251143995c2a89b0b7bc616edd6f) · 22/26 checks passing
+[Repository](https://github.com/scrapy/cssselect) · commit [`d1f8b2a`](https://github.com/scrapy/cssselect/commit/d1f8b2a771a6976efea0038ac3e9b8efb85cfef7) · 22/28 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -44,6 +44,11 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 **Tests and coverage**
 
 - ❌ [`codecov-test-results`](REPORT.md#codecov-test-results): no codecov/codecov-action step with report_type: test_results
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 ### scrapy/formerly
 
@@ -89,7 +94,7 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: n
 
 ### scrapy/itemloaders
 
-[Repository](https://github.com/scrapy/itemloaders) · commit [`f3e6800`](https://github.com/scrapy/itemloaders/commit/f3e680016d0fd49f24a656f440938ec14c0cd9db) · 22/28 checks passing
+[Repository](https://github.com/scrapy/itemloaders) · commit [`f3e6800`](https://github.com/scrapy/itemloaders/commit/f3e680016d0fd49f24a656f440938ec14c0cd9db) · 22/30 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -106,6 +111,11 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 - ❌ [`codecov-test-results`](REPORT.md#codecov-test-results): no codecov/codecov-action step with report_type: test_results
 
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
+
 **Releases**
 
 - ❌ [`publish-on-tag`](REPORT.md#publish-on-tag): .github/workflows/publish.yml is triggered by GitHub releases
@@ -113,7 +123,7 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 
 ### scrapy/parsel
 
-[Repository](https://github.com/scrapy/parsel) · commit [`8ee96b7`](https://github.com/scrapy/parsel/commit/8ee96b7239775b4dbf214fd17e51d49e95538f16) · 24/28 checks passing
+[Repository](https://github.com/scrapy/parsel) · commit [`8ee96b7`](https://github.com/scrapy/parsel/commit/8ee96b7239775b4dbf214fd17e51d49e95538f16) · 28/32 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -162,7 +172,7 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: n
 
 ### scrapy/w3lib
 
-[Repository](https://github.com/scrapy/w3lib) · commit [`ade4b62`](https://github.com/scrapy/w3lib/commit/ade4b62e55da45a8e5ead6ed21dcdedd018b9672) · 23/26 checks passing
+[Repository](https://github.com/scrapy/w3lib) · commit [`ade4b62`](https://github.com/scrapy/w3lib/commit/ade4b62e55da45a8e5ead6ed21dcdedd018b9672) · 23/28 checks passing
 
 supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -177,6 +187,11 @@ supports-pypy: yes · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: y
 **Tests and coverage**
 
 - ❌ [`codecov-test-results`](REPORT.md#codecov-test-results): no codecov/codecov-action step with report_type: test_results
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 ### scrapy/sphinx-scrapy
 
@@ -247,7 +262,7 @@ supports-pypy: no · license: MIT · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/scrapy-poet
 
-[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`261e297`](https://github.com/scrapinghub/scrapy-poet/commit/261e297ce06c5b1687c6560c84b4e934d6cdcb74) · 20/26 checks passing
+[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`261e297`](https://github.com/scrapinghub/scrapy-poet/commit/261e297ce06c5b1687c6560c84b4e934d6cdcb74) · 23/30 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -267,6 +282,10 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 **Linting**
 
 - ❌ [`zizmor`](REPORT.md#zizmor): missing pre-commit hooks: zizmor
+
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.8.4, latest is 0.13.0
 
 **Releases**
 
@@ -288,7 +307,7 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/web-poet
 
-[Repository](https://github.com/scrapinghub/web-poet) · commit [`b3cc347`](https://github.com/scrapinghub/web-poet/commit/b3cc347952b9bc6cf534e44543b789d2f5f2fafb) · 18/26 checks passing
+[Repository](https://github.com/scrapinghub/web-poet) · commit [`b3cc347`](https://github.com/scrapinghub/web-poet/commit/b3cc347952b9bc6cf534e44543b789d2f5f2fafb) · 21/30 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -314,13 +333,17 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 - ❌ [`actionlint`](REPORT.md#actionlint): missing pre-commit hooks: actionlint
 
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.8.12, latest is 0.13.0
+
 **Releases**
 
 - ❌ [`separate-build-job`](REPORT.md#separate-build-job): .github/workflows/publish.yml: job 'deploy' builds and publishes
 
 ### zytedata/url-matcher
 
-[Repository](https://github.com/zytedata/url-matcher) · commit [`b55ff5c`](https://github.com/zytedata/url-matcher/commit/b55ff5cc14b3346be16edf9e6faa603ebdfbf216) · 24/26 checks passing
+[Repository](https://github.com/zytedata/url-matcher) · commit [`b55ff5c`](https://github.com/zytedata/url-matcher/commit/b55ff5cc14b3346be16edf9e6faa603ebdfbf216) · 28/30 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
@@ -336,7 +359,7 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
 ### scrapy-plugins/scrapy-zyte-api
 
-[Repository](https://github.com/scrapy-plugins/scrapy-zyte-api) · commit [`2b15197`](https://github.com/scrapy-plugins/scrapy-zyte-api/commit/2b151972c7fa6412cf552d5c46a59e601d036e59) · 22/26 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-zyte-api) · commit [`2b15197`](https://github.com/scrapy-plugins/scrapy-zyte-api/commit/2b151972c7fa6412cf552d5c46a59e601d036e59) · 25/30 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -349,13 +372,17 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 - ❌ [`codecov-test-results`](REPORT.md#codecov-test-results): no codecov/codecov-action step with report_type: test_results
 
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.8.12, latest is 0.13.0
+
 **Releases**
 
 - ❌ [`separate-build-job`](REPORT.md#separate-build-job): .github/workflows/publish.yml: job 'publish' builds and publishes
 
 ### zytedata/python-zyte-api
 
-[Repository](https://github.com/zytedata/python-zyte-api) · commit [`efc4fdc`](https://github.com/zytedata/python-zyte-api/commit/efc4fdc6cebf36de26a946d0e665d539cafbecf9) · 19/26 checks passing
+[Repository](https://github.com/zytedata/python-zyte-api) · commit [`efc4fdc`](https://github.com/zytedata/python-zyte-api/commit/efc4fdc6cebf36de26a946d0e665d539cafbecf9) · 23/30 checks passing
 
 supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
@@ -383,7 +410,7 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 ### scrapy-plugins/scrapy-zyte-smartproxy
 
-[Repository](https://github.com/scrapy-plugins/scrapy-zyte-smartproxy) · commit [`debd444`](https://github.com/scrapy-plugins/scrapy-zyte-smartproxy/commit/debd4445343d0c3a1eba9fa0ce269613bb3b9d5c) · 7/22 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-zyte-smartproxy) · commit [`debd444`](https://github.com/scrapy-plugins/scrapy-zyte-smartproxy/commit/debd4445343d0c3a1eba9fa0ce269613bb3b9d5c) · 7/24 checks passing
 
 supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
@@ -416,13 +443,18 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 - ❌ [`blacken-docs`](REPORT.md#blacken-docs): missing pre-commit hooks: blacken-docs
 - ❌ [`sphinx-lint`](REPORT.md#sphinx-lint): missing pre-commit hooks: sphinx-lint
 
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
+
 **Releases**
 
 - ❌ [`separate-build-job`](REPORT.md#separate-build-job): .github/workflows/publish.yml: job 'publish' builds and publishes
 
 ### zytedata/zyte-common-items
 
-[Repository](https://github.com/zytedata/zyte-common-items) · commit [`1309123`](https://github.com/zytedata/zyte-common-items/commit/13091232ca4eb0b260a45c68f90a0e42d521d811) · 17/26 checks passing
+[Repository](https://github.com/zytedata/zyte-common-items) · commit [`1309123`](https://github.com/zytedata/zyte-common-items/commit/13091232ca4eb0b260a45c68f90a0e42d521d811) · 18/30 checks passing
 
 supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
@@ -445,6 +477,12 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 - ❌ [`zizmor`](REPORT.md#zizmor): missing pre-commit hooks: zizmor
 
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy-pins`](REPORT.md#sphinx-scrapy-pins): not pinned in tox, docs/requirements.in, .pre-commit-config.yaml
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): not pinned
+
 **Releases**
 
 - ❌ [`trusted-publishing`](REPORT.md#trusted-publishing): .github/workflows/publish.yml uses an API token; .github/workflows/publish.yml lacks the id-token: write permission
@@ -452,7 +490,7 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: yes
 
 ### zytedata/zyte-parsers
 
-[Repository](https://github.com/zytedata/zyte-parsers) · commit [`4f5d08d`](https://github.com/zytedata/zyte-parsers/commit/4f5d08d1be951fa438f0aedd598d61a61c360ea0) · 22/26 checks passing
+[Repository](https://github.com/zytedata/zyte-parsers) · commit [`4f5d08d`](https://github.com/zytedata/zyte-parsers/commit/4f5d08d1be951fa438f0aedd598d61a61c360ea0) · 22/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
@@ -468,6 +506,11 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 **Typing**
 
 - ❌ [`typed-classifier`](REPORT.md#typed-classifier): no 'Typing :: Typed' classifier
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 ### zytedata/clear-html
 
@@ -555,7 +598,7 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/python-scrapinghub
 
-[Repository](https://github.com/scrapinghub/python-scrapinghub) · commit [`d0d7b29`](https://github.com/scrapinghub/python-scrapinghub/commit/d0d7b29153e40bbb0f9c56ab23caab86393f853e) · 6/23 checks passing
+[Repository](https://github.com/scrapinghub/python-scrapinghub) · commit [`d0d7b29`](https://github.com/scrapinghub/python-scrapinghub/commit/d0d7b29153e40bbb0f9c56ab23caab86393f853e) · 9/27 checks passing
 
 supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 
@@ -594,9 +637,13 @@ supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 - ❌ [`blacken-docs`](REPORT.md#blacken-docs): missing pre-commit hooks: blacken-docs
 - ❌ [`sphinx-lint`](REPORT.md#sphinx-lint): missing pre-commit hooks: sphinx-lint
 
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.7.1, latest is 0.13.0
+
 ### scrapinghub/shub
 
-[Repository](https://github.com/scrapinghub/shub) · commit [`80a4cad`](https://github.com/scrapinghub/shub/commit/80a4cad661f2a669739c8c3805fd33c67e62674e) · 9/24 checks passing
+[Repository](https://github.com/scrapinghub/shub) · commit [`80a4cad`](https://github.com/scrapinghub/shub/commit/80a4cad661f2a669739c8c3805fd33c67e62674e) · 12/28 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -631,6 +678,10 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 - ❌ [`blacken-docs`](REPORT.md#blacken-docs): missing pre-commit hooks: blacken-docs
 - ❌ [`sphinx-lint`](REPORT.md#sphinx-lint): missing pre-commit hooks: sphinx-lint
 
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.8.4, latest is 0.13.0
+
 **Releases**
 
 - ❌ [`trusted-publishing`](REPORT.md#trusted-publishing): .github/workflows/publish.yml publishes with twine upload
@@ -638,7 +689,7 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 ### scrapinghub/scrapinghub-entrypoint-scrapy
 
-[Repository](https://github.com/scrapinghub/scrapinghub-entrypoint-scrapy) · commit [`6f44137`](https://github.com/scrapinghub/scrapinghub-entrypoint-scrapy/commit/6f4413767e33b492eb0e50a0b30e3ae7b5ba7829) · 3/19 checks passing
+[Repository](https://github.com/scrapinghub/scrapinghub-entrypoint-scrapy) · commit [`bf9632c`](https://github.com/scrapinghub/scrapinghub-entrypoint-scrapy/commit/bf9632c78355b545126363ce557106c1b9c3bb54) · 3/19 checks passing
 
 supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 
@@ -683,7 +734,7 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 
 ### scrapy/form2request
 
-[Repository](https://github.com/scrapy/form2request) · commit [`a251597`](https://github.com/scrapy/form2request/commit/a251597d9fa44cbd03736ec1da37f85593dfe820) · 23/26 checks passing
+[Repository](https://github.com/scrapy/form2request) · commit [`a251597`](https://github.com/scrapy/form2request/commit/a251597d9fa44cbd03736ec1da37f85593dfe820) · 23/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
@@ -698,6 +749,11 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 **Typing**
 
 - ❌ [`typed-classifier`](REPORT.md#typed-classifier): no 'Typing :: Typed' classifier
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 ### scrapy/frostwork
 
@@ -738,7 +794,7 @@ All applicable checks pass.
 
 ### scrapy/scrapy-lint
 
-[Repository](https://github.com/scrapy/scrapy-lint) · commit [`30a3872`](https://github.com/scrapy/scrapy-lint/commit/30a387279f0be38a48237d31725b1d52a2bcf297) · 19/25 checks passing
+[Repository](https://github.com/scrapy/scrapy-lint) · commit [`30a3872`](https://github.com/scrapy/scrapy-lint/commit/30a387279f0be38a48237d31725b1d52a2bcf297) · 20/29 checks passing
 
 supports-pypy: no · license: MIT · pylint: yes · has-sphinx-docs: yes
 
@@ -758,6 +814,12 @@ supports-pypy: no · license: MIT · pylint: yes · has-sphinx-docs: yes
 **Linting**
 
 - ❌ [`actionlint`](REPORT.md#actionlint): missing pre-commit hooks: actionlint
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy-pins`](REPORT.md#sphinx-scrapy-pins): not pinned in tox, docs/requirements.in, .pre-commit-config.yaml
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): not pinned
 
 **Releases**
 
@@ -855,7 +917,7 @@ supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: no
 
 ### scrapy-plugins/scrapy-spider-metadata
 
-[Repository](https://github.com/scrapy-plugins/scrapy-spider-metadata) · commit [`63b3991`](https://github.com/scrapy-plugins/scrapy-spider-metadata/commit/63b3991dc8f181b2ef358e3b09aeda13261dd7c3) · 14/28 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-spider-metadata) · commit [`63b3991`](https://github.com/scrapy-plugins/scrapy-spider-metadata/commit/63b3991dc8f181b2ef358e3b09aeda13261dd7c3) · 14/30 checks passing
 
 supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 
@@ -885,6 +947,11 @@ supports-pypy: yes · license: BSD License · pylint: no · has-sphinx-docs: yes
 - ❌ [`zizmor`](REPORT.md#zizmor): missing pre-commit hooks: zizmor
 - ❌ [`blacken-docs`](REPORT.md#blacken-docs): missing pre-commit hooks: blacken-docs
 - ❌ [`sphinx-lint`](REPORT.md#sphinx-lint): missing pre-commit hooks: sphinx-lint
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 **Releases**
 
@@ -937,7 +1004,7 @@ supports-pypy: no · license: no · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/dateparser
 
-[Repository](https://github.com/scrapinghub/dateparser) · commit [`fed9cf9`](https://github.com/scrapinghub/dateparser/commit/fed9cf94e9d8a1128b396f01ca66f4a303f03ee4) · 15/25 checks passing
+[Repository](https://github.com/scrapinghub/dateparser) · commit [`fed9cf9`](https://github.com/scrapinghub/dateparser/commit/fed9cf94e9d8a1128b396f01ca66f4a303f03ee4) · 15/27 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -964,6 +1031,11 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 - ❌ [`actionlint`](REPORT.md#actionlint): missing pre-commit hooks: actionlint
 - ❌ [`blacken-docs`](REPORT.md#blacken-docs): missing pre-commit hooks: blacken-docs
 - ❌ [`sphinx-lint`](REPORT.md#sphinx-lint): missing pre-commit hooks: sphinx-lint
+
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
 
 **Releases**
 
@@ -1055,7 +1127,7 @@ supports-pypy: no · license: BSD License · pylint: no · has-sphinx-docs: no
 
 ### scrapinghub/scrapyrt
 
-[Repository](https://github.com/scrapinghub/scrapyrt) · commit [`6d00a0a`](https://github.com/scrapinghub/scrapyrt/commit/6d00a0ad55c310c268fb13a151a3f3c98f0cabb4) · 13/25 checks passing
+[Repository](https://github.com/scrapinghub/scrapyrt) · commit [`6d00a0a`](https://github.com/scrapinghub/scrapyrt/commit/6d00a0ad55c310c268fb13a151a3f3c98f0cabb4) · 14/29 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: yes
 
@@ -1081,6 +1153,12 @@ supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: ye
 - ❌ [`actionlint`](REPORT.md#actionlint): missing pre-commit hooks: actionlint
 - ❌ [`zizmor`](REPORT.md#zizmor): missing pre-commit hooks: zizmor
 
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy-pins`](REPORT.md#sphinx-scrapy-pins): not pinned in tox, docs/requirements.in, .pre-commit-config.yaml
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): not pinned
+
 **Releases**
 
 - ❌ [`trusted-publishing`](REPORT.md#trusted-publishing): .github/workflows/publish.yml uses an API token
@@ -1088,7 +1166,7 @@ supports-pypy: no · license: BSD-3-Clause · pylint: yes · has-sphinx-docs: ye
 
 ### scrapinghub/spidermon
 
-[Repository](https://github.com/scrapinghub/spidermon) · commit [`4b9a8ff`](https://github.com/scrapinghub/spidermon/commit/4b9a8ffe16c30a0f61461f1570055c1b8dfded72) · 18/25 checks passing
+[Repository](https://github.com/scrapinghub/spidermon) · commit [`4b9a8ff`](https://github.com/scrapinghub/spidermon/commit/4b9a8ffe16c30a0f61461f1570055c1b8dfded72) · 18/27 checks passing
 
 supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
@@ -1113,13 +1191,18 @@ supports-pypy: no · license: BSD-3-Clause · pylint: no · has-sphinx-docs: yes
 
 - ❌ [`zizmor`](REPORT.md#zizmor): missing pre-commit hooks: zizmor
 
+**Documentation**
+
+- ❌ [`docs-requirements-in`](REPORT.md#docs-requirements-in): no docs/requirements.in
+- ❌ [`sphinx-scrapy`](REPORT.md#sphinx-scrapy): sphinx_scrapy not in docs/conf.py or docs/requirements.in
+
 **Releases**
 
 - ❌ [`separate-build-job`](REPORT.md#separate-build-job): .github/workflows/publish.yml: job 'publish' builds and publishes
 
 ### zytedata/agent-exam
 
-[Repository](https://github.com/zytedata/agent-exam) · commit [`c88fec1`](https://github.com/zytedata/agent-exam/commit/c88fec170ff9683dad9d769601206088fdbaeb7d) · 16/24 checks passing
+[Repository](https://github.com/zytedata/agent-exam) · commit [`c88fec1`](https://github.com/zytedata/agent-exam/commit/c88fec170ff9683dad9d769601206088fdbaeb7d) · 19/28 checks passing
 
 supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 
@@ -1141,6 +1224,10 @@ supports-pypy: no · license: Apache-2.0 · pylint: no · has-sphinx-docs: yes
 - ❌ [`codecov`](REPORT.md#codecov): no codecov/codecov-action step for coverage
 - ❌ [`codecov-test-results`](REPORT.md#codecov-test-results): no codecov/codecov-action step with report_type: test_results
 - ❌ [`branch-coverage`](REPORT.md#branch-coverage): no branch = true in coverage config, and no --cov-branch
+
+**Documentation**
+
+- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.8.10, latest is 0.13.0
 
 **Releases**
 
