@@ -31,6 +31,7 @@ from typing import TYPE_CHECKING
 
 from oss_maint.checks import (
     dependencies,
+    docs,
     linting,
     packaging,
     python,
@@ -49,6 +50,7 @@ GROUPS: list[Group] = [
     type_checking.group,
     testing.group,
     linting.group,
+    docs.group,
     releases.group,
 ]
 
