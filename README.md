@@ -30,8 +30,11 @@ Projects are shallow-cloned from the default branch on GitHub into
 `--no-sync`. Syncing also deletes checkouts of projects no longer in
 `projects.toml`.
 
-To refresh the reports, run `uv run oss-maint report` and commit `REPORT.md`
-and `PROJECTS.md`.
+The reports are refreshed weekly by the [Update the report](.github/workflows/report.yml)
+workflow, which commits them if anything other than the generation date
+changed; it can also be run manually from the Actions tab. To refresh them
+locally, run `uv run oss-maint report` and commit `REPORT.md` and
+`PROJECTS.md`.
 
 ## Adding a project
 
