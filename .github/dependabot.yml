@@ -10,5 +10,5 @@ updates:
           - "*"
     cooldown:
       default-days: 7
-    ignore:
-      - dependency-name: "zytedata/governance"
+    exclude-paths:
+      - ".github/workflows/secrets.yml"
