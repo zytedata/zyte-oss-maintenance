@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from datetime import date
 from textwrap import dedent
 from typing import TYPE_CHECKING
 
@@ -11,13 +10,16 @@ from oss_maint.checks import GROUPS, select_groups
 from oss_maint.core import PYPY_CLASSIFIER, Repo, Result, Status, tally
 
 if TYPE_CHECKING:
+    from collections.abc import Callable
     from pathlib import Path
+
+    MakeRepo = Callable[[dict[str, str]], Repo]
 
 CHECKS = {c.id: c for g in GROUPS for c in g.checks}
 
 
 @pytest.fixture
-def make_repo(tmp_path: Path):
+def make_repo(tmp_path: Path) -> MakeRepo:
     def make_repo(files: dict[str, str]) -> Repo:
         for path, content in files.items():
             (tmp_path / path).parent.mkdir(parents=True, exist_ok=True)
@@ -25,23 +27,6 @@ def make_repo(tmp_path: Path):
         return Repo("owner/name", tmp_path)
 
     return make_repo
-
-
-@pytest.fixture(autouse=True)
-def fake_python_cycles(monkeypatch: pytest.MonkeyPatch) -> None:
-    cycles = [
-        pythons.PythonCycle("3.9", date(2020, 10, 5), date(2025, 10, 31)),
-        pythons.PythonCycle("3.10", date(2021, 10, 4), date(2099, 10, 31)),
-        pythons.PythonCycle("3.11", date(2022, 10, 24), date(2099, 10, 31)),
-        pythons.PythonCycle("3.12", date(2099, 10, 2), date(2099, 10, 31)),
-    ]
-    monkeypatch.setattr(pythons, "python_cycles", lambda: cycles)
-    monkeypatch.setattr(pythons, "upcoming_python", lambda: "3.12")
-    monkeypatch.setattr(
-        pythons,
-        "pypy_versions",
-        lambda: pythons.PyPyVersions(supported=["3.10", "3.11"], eol=["3.9"]),
-    )
 
 
 def run(check_id: str, repo: Repo) -> Result:
@@ -73,7 +58,7 @@ def test_select_groups() -> None:
     ],
 )
 def test_no_eol_python_requires_python(
-    make_repo, requires_python: str, status: Status
+    make_repo: MakeRepo, requires_python: str, status: Status
 ) -> None:
     repo = make_repo(
         {"pyproject.toml": f'[project]\nrequires-python = "{requires_python}"\n'}
@@ -81,7 +66,7 @@ def test_no_eol_python_requires_python(
     assert run("no-eol-python", repo).status is status
 
 
-def test_no_eol_python_classifiers(make_repo) -> None:
+def test_no_eol_python_classifiers(make_repo: MakeRepo) -> None:
     repo = make_repo(
         {
             "pyproject.toml": """\
@@ -96,12 +81,12 @@ def test_no_eol_python_classifiers(make_repo) -> None:
     assert "classifiers list 3.9" in result.detail
 
 
-def test_no_eol_python_setup_py(make_repo) -> None:
+def test_no_eol_python_setup_py(make_repo: MakeRepo) -> None:
     repo = make_repo({"setup.py": "setup(python_requires='>=3.9')\n"})
     assert run("no-eol-python", repo).status is Status.FAIL
 
 
-def test_latest_python(make_repo) -> None:
+def test_latest_python(make_repo: MakeRepo) -> None:
     files = {
         "pyproject.toml": """\
             [project]
@@ -165,7 +150,7 @@ def test_latest_python(make_repo) -> None:
         ),
     ],
 )
-def test_trusted_publishing(make_repo, workflow: str, status: Status) -> None:
+def test_trusted_publishing(make_repo: MakeRepo, workflow: str, status: Status) -> None:
     repo = make_repo({".github/workflows/publish.yml": workflow})
     assert run("trusted-publishing", repo).status is status
 
@@ -179,7 +164,7 @@ def test_trusted_publishing(make_repo, workflow: str, status: Status) -> None:
         (["ruff-check"], Status.FAIL),
     ],
 )
-def test_ruff(make_repo, hooks: list[str], status: Status) -> None:
+def test_ruff(make_repo: MakeRepo, hooks: list[str], status: Status) -> None:
     config = "repos:\n- repo: x\n  hooks:\n" + "".join(f"  - id: {h}\n" for h in hooks)
     repo = make_repo({".pre-commit-config.yaml": config})
     assert run("ruff", repo).status is status
@@ -197,18 +182,18 @@ def test_ruff(make_repo, hooks: list[str], status: Status) -> None:
         ('license = "Not SPDX"', Status.FAIL),
     ],
 )
-def test_pep639_license(make_repo, project: str, status: Status) -> None:
+def test_pep639_license(make_repo: MakeRepo, project: str, status: Status) -> None:
     repo = make_repo({"pyproject.toml": f"[project]\n{project}\n"})
     assert run("pep639-license", repo).status is status
 
 
-def test_check_error(make_repo) -> None:
+def test_check_error(make_repo: MakeRepo) -> None:
     repo = make_repo({"pyproject.toml": "not toml ["})
     assert run("hatchling", repo).status is Status.ERROR
 
 
 @pytest.mark.parametrize("check_id", ["blacken-docs", "sphinx-lint"])
-def test_docs_hooks(make_repo, check_id: str) -> None:
+def test_docs_hooks(make_repo: MakeRepo, check_id: str) -> None:
     files = {".pre-commit-config.yaml": "repos: []\n"}
     assert run(check_id, make_repo(files)).status is Status.NA
     files["docs/conf.py"] = ""
@@ -217,7 +202,7 @@ def test_docs_hooks(make_repo, check_id: str) -> None:
     assert result.detail == f"missing pre-commit hooks: {check_id}"
 
 
-def test_ci_versions(make_repo) -> None:
+def test_ci_versions(make_repo: MakeRepo) -> None:
     repo = make_repo(
         {
             ".github/workflows/test.yml": """\
@@ -248,7 +233,9 @@ def test_ci_versions(make_repo) -> None:
     assert repo.ci_pypy_versions == {"3.9", "3.10", "3.11"}
 
 
-def test_unreleased_python(make_repo, monkeypatch: pytest.MonkeyPatch) -> None:
+def test_unreleased_python(
+    make_repo: MakeRepo, monkeypatch: pytest.MonkeyPatch
+) -> None:
     workflow = "jobs: {test: {steps: [{with: {python-version: '3.12.0-rc.1'}}]}}\n"
     repo = make_repo({".github/workflows/test.yml": workflow})
     assert run("unreleased-python", repo).status is Status.PASS
@@ -280,7 +267,11 @@ def test_unreleased_python(make_repo, monkeypatch: pytest.MonkeyPatch) -> None:
     ],
 )
 def test_pypy(
-    make_repo, files: dict[str, str], supports: Status, latest: Status, no_eol: Status
+    make_repo: MakeRepo,
+    files: dict[str, str],
+    supports: Status,
+    latest: Status,
+    no_eol: Status,
 ) -> None:
     repo = make_repo(files)
     assert run("supports-pypy", repo).status is supports
@@ -315,7 +306,7 @@ def test_tally() -> None:
         ("workflow_dispatch", Status.FAIL),
     ],
 )
-def test_publish_on_tag(make_repo, on: str, status: Status) -> None:
+def test_publish_on_tag(make_repo: MakeRepo, on: str, status: Status) -> None:
     workflow = (
         f"on: {on}\n"
         "jobs: {publish: {steps: [{uses: pypa/gh-action-pypi-publish@release/v1}]}}\n"
@@ -324,7 +315,7 @@ def test_publish_on_tag(make_repo, on: str, status: Status) -> None:
     assert run("publish-on-tag", repo).status is status
 
 
-def test_separate_build_job(make_repo) -> None:
+def test_separate_build_job(make_repo: MakeRepo) -> None:
     workflow = """\
         jobs:
           build:
@@ -356,7 +347,7 @@ def test_separate_build_job(make_repo) -> None:
 
 
 @pytest.mark.parametrize("check_id", ["publish-on-tag", "separate-build-job"])
-def test_no_publishing(make_repo, check_id: str) -> None:
+def test_no_publishing(make_repo: MakeRepo, check_id: str) -> None:
     repo = make_repo({".github/workflows/test.yml": "jobs: {test: {steps: []}}\n"})
     result = run(check_id, repo)
     assert result.status is Status.FAIL
@@ -380,7 +371,7 @@ def test_no_publishing(make_repo, check_id: str) -> None:
         ({}, ""),
     ],
 )
-def test_license(make_repo, files: dict[str, str], value: str) -> None:
+def test_license(make_repo: MakeRepo, files: dict[str, str], value: str) -> None:
     result = run("license", make_repo(files))
     assert result.value == value
     assert result.status is (Status.YES if value else Status.NO)
@@ -406,7 +397,9 @@ def test_license(make_repo, files: dict[str, str], value: str) -> None:
         ),
     ],
 )
-def test_twine_check(make_repo, files: dict[str, str], status: Status) -> None:
+def test_twine_check(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
+) -> None:
     assert run("twine-check", make_repo(files)).status is status
 
 
@@ -448,7 +441,9 @@ def test_twine_check(make_repo, files: dict[str, str], status: Status) -> None:
         ),
     ],
 )
-def test_mypy(make_repo, files: dict[str, str], mypy: Status, strict: Status) -> None:
+def test_mypy(
+    make_repo: MakeRepo, files: dict[str, str], mypy: Status, strict: Status
+) -> None:
     repo = make_repo(files)
     assert run("mypy", repo).status is mypy
     assert run("mypy-strict", repo).status is strict
@@ -466,11 +461,13 @@ def test_mypy(make_repo, files: dict[str, str], mypy: Status, strict: Status) ->
         ({".coveragerc": "[run]\nsource = foo\n"}, Status.FAIL),
     ],
 )
-def test_branch_coverage(make_repo, files: dict[str, str], status: Status) -> None:
+def test_branch_coverage(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
+) -> None:
     assert run("branch-coverage", make_repo(files)).status is status
 
 
-def test_codecov(make_repo) -> None:
+def test_codecov(make_repo: MakeRepo) -> None:
     repo = make_repo({})
     assert run("codecov", repo).status is Status.FAIL
     assert run("codecov-test-results", repo).status is Status.FAIL
@@ -504,11 +501,13 @@ def test_codecov(make_repo) -> None:
         ({}, Status.FAIL),
     ],
 )
-def test_bump_my_version(make_repo, files: dict[str, str], status: Status) -> None:
+def test_bump_my_version(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
+) -> None:
     assert run("bump-my-version", make_repo(files)).status is status
 
 
-def test_project_urls(make_repo) -> None:
+def test_project_urls(make_repo: MakeRepo) -> None:
     assert run("project-urls", make_repo({})).status is Status.NA
     repo = make_repo({"pyproject.toml": '[project]\nname = "x"\n'})
     assert run("project-urls", repo).status is Status.FAIL
@@ -526,7 +525,9 @@ def test_project_urls(make_repo) -> None:
         ("[options.packages.find]\nwhere = src\n", Status.FAIL),
     ],
 )
-def test_pyproject_metadata(make_repo, setup_cfg: str, status: Status) -> None:
+def test_pyproject_metadata(
+    make_repo: MakeRepo, setup_cfg: str, status: Status
+) -> None:
     files = {"pyproject.toml": '[project]\nname = "x"\n'}
     if setup_cfg:
         files["setup.cfg"] = setup_cfg
@@ -550,7 +551,7 @@ def test_pyproject_metadata(make_repo, setup_cfg: str, status: Status) -> None:
     ],
 )
 def test_python_classifiers(
-    make_repo,
+    make_repo: MakeRepo,
     requires_python: str | None,
     versions: list[str],
     status: Status,
@@ -564,7 +565,7 @@ def test_python_classifiers(
     assert result == Result(status, detail)
 
 
-def test_typed_classifier(make_repo) -> None:
+def test_typed_classifier(make_repo: MakeRepo) -> None:
     files = {"pyproject.toml": '[project]\nclassifiers = ["Typing :: Typed"]\n'}
     assert run("typed-classifier", make_repo(files)).status is Status.NA
     files["pkg/py.typed"] = ""
@@ -584,7 +585,9 @@ def test_typed_classifier(make_repo) -> None:
         ("[]", Status.NA),
     ],
 )
-def test_dependency_lower_bounds(make_repo, dependencies: str, status: Status) -> None:
+def test_dependency_lower_bounds(
+    make_repo: MakeRepo, dependencies: str, status: Status
+) -> None:
     repo = make_repo({"pyproject.toml": f"[project]\ndependencies = {dependencies}\n"})
     result = run("dependency-lower-bounds", repo)
     assert result.status is status
@@ -601,17 +604,19 @@ def test_dependency_lower_bounds(make_repo, dependencies: str, status: Status) -
         ({"tox.ini": "[tox]\nminversion = 4\nenvlist = py310\n"}, Status.FAIL),
     ],
 )
-def test_min_deps_env(make_repo, files: dict[str, str], status: Status) -> None:
+def test_min_deps_env(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
+) -> None:
     files["pyproject.toml"] = '[project]\ndependencies = ["lxml>=5"]\n'
     assert run("min-deps-env", make_repo(files)).status is status
 
 
-def test_min_deps_env_no_dependencies(make_repo) -> None:
+def test_min_deps_env_no_dependencies(make_repo: MakeRepo) -> None:
     repo = make_repo({"pyproject.toml": '[project]\nname = "x"\n'})
     assert run("min-deps-env", repo).status is Status.NA
 
 
-def test_pylint(make_repo) -> None:
+def test_pylint(make_repo: MakeRepo) -> None:
     assert (
         run("pylint", make_repo({"tox.ini": "[tox]\nenvlist = py310\n"})).status
         is Status.NO
