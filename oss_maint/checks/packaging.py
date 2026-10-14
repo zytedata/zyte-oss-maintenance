@@ -49,6 +49,50 @@ def pyproject_metadata(repo: Repo) -> Result:
     return failed("; ".join(problems)) if problems else passed()
 
 
+# Configuration files that pyproject.toml replaces, or of tools that ruff
+# replaces.
+LEGACY_FILES = (
+    ".bandit",
+    ".bandit.yml",
+    ".coveragerc",
+    ".flake8",
+    ".isort.cfg",
+    ".mypy.ini",
+    ".pylintrc",
+    "mypy.ini",
+    "pylintrc",
+    "pytest.ini",
+    "requirements-dev.txt",
+)
+# Sections of setup.cfg or tox.ini with tool configuration.
+TOOL_SECTION_RE = re.compile(
+    r"(tool:)?pytest|flake8|isort|mypy(-.+)?|coverage:.+|pycodestyle|pydocstyle"
+    r"|pylint(\..+)?|bandit"
+)
+
+
+@group.check(
+    "There are no legacy configuration files, e.g. .coveragerc, pytest.ini, "
+    ".flake8 or requirements-dev.txt, and no tool configuration in setup.cfg or "
+    "tox.ini."
+)
+def no_legacy_config(repo: Repo) -> Result:
+    problems = []
+    if files := [f for f in LEGACY_FILES if repo.exists(f)]:
+        problems.append(f"legacy files: {', '.join(files)}")
+    backend = (repo.pyproject or {}).get("build-system", {}).get("build-backend")
+    if backend and not backend.startswith("setuptools") and repo.exists("MANIFEST.in"):
+        problems.append(f"MANIFEST.in, which {backend} ignores")
+    for path in ("setup.cfg", "tox.ini"):
+        config = configparser.ConfigParser(interpolation=None, strict=False)
+        config.read_string(repo.read_text(path) or "")
+        if sections := [
+            f"[{s}]" for s in config.sections() if TOOL_SECTION_RE.fullmatch(s)
+        ]:
+            problems.append(f"tool sections in {path}: {', '.join(sections)}")
+    return failed("; ".join(problems)) if problems else passed()
+
+
 @group.info(
     "The license: the license field of package metadata, or else the license "
     "classifiers."

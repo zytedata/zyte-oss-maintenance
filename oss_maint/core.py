@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import configparser
 import re
 import subprocess
 import tomllib
@@ -41,7 +42,9 @@ def tally(check: Check, results: list[Result]) -> str:
     or, for informational checks, "2/5 yes" or "MIT (3), BSD-3-Clause (2)"."""
     statuses = [r.status for r in results]
     if check.informational:
-        if values := Counter(r.value for r in results if r.value):
+        values = Counter(r.value for r in results if r.value)
+        # Values that are all different, e.g. versions, are not worth listing.
+        if values and max(values.values()) > 1:
             if no := statuses.count(Status.NO):
                 values["no"] = no
             return ", ".join(f"{value} ({n})" for value, n in values.most_common())
@@ -257,6 +260,21 @@ class Repo:
         return (self.pyproject or {}).get("project", {})
 
     @cached_property
+    def dist_name(self) -> str | None:
+        """The distribution name from pyproject.toml, or scraped from setup.py
+        or setup.cfg."""
+        if "name" in self.project:
+            return self.project["name"]
+        for path, pattern in (
+            ("setup.py", r"\bname\s*=\s*[\"']([^\"']+)[\"']"),
+            ("setup.cfg", r"^name\s*=\s*(.+?)\s*$"),
+        ):
+            text = self.read_text(path) or ""
+            if m := re.search(pattern, text, re.MULTILINE):
+                return m.group(1)
+        return None
+
+    @cached_property
     def requires_python(self) -> str | None:
         """requires-python from pyproject.toml, or python_requires from
         setup.py or setup.cfg."""
@@ -357,6 +375,26 @@ class Repo:
             if not line.lstrip().startswith(("#", ";"))
         )
         return strings
+
+    @cached_property
+    def tox_envs(self) -> dict[str, list[str]]:
+        """Keys and values from the configuration of each tox environment
+        defined in its own section, by name."""
+        envs = {}
+        for config in (
+            self.read_toml("tox.toml") or {},
+            (self.pyproject or {}).get("tool", {}).get("tox", {}),
+        ):
+            for name, env in (config.get("env") or {}).items():
+                envs[name] = list(_strings(env))
+        ini = configparser.ConfigParser(interpolation=None, strict=False)
+        ini.read_string(self.read_text("tox.ini") or "")
+        for section in ini.sections():
+            if section.startswith("testenv:"):
+                envs[section.removeprefix("testenv:")] = [
+                    s for item in ini.items(section) for s in item
+                ]
+        return envs
 
     @cached_property
     def ci_strings(self) -> list[str]:

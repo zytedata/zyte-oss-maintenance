@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import configparser
+import re
+from typing import Any
 
 from oss_maint.core import Group, Repo, Result, failed, passed
 
@@ -58,3 +60,41 @@ def branch_coverage(repo: Repo) -> Result:
     if any("--cov-branch" in s for s in pytest_config):
         return passed()
     return failed("no branch = true in coverage config, and no --cov-branch")
+
+
+def _pytest_option(repo: Repo, name: str) -> list[str]:
+    """Values of the *name* pytest option in any pytest configuration, as
+    lines or list items."""
+    values: list[Any] = []
+    pytest = (repo.pyproject or {}).get("tool", {}).get("pytest", {})
+    for config in (
+        pytest.get("ini_options", pytest),
+        (repo.read_toml("pytest.toml") or {}).get("pytest", {}),
+        (repo.read_toml(".pytest.toml") or {}).get("pytest", {}),
+    ):
+        value = config.get(name, [])
+        values.extend(value.splitlines() if isinstance(value, str) else value)
+    for path, section in (
+        ("pytest.ini", "pytest"),
+        (".pytest.ini", "pytest"),
+        ("tox.ini", "pytest"),
+        ("setup.cfg", "tool:pytest"),
+    ):
+        config = configparser.ConfigParser(interpolation=None, strict=False)
+        config.read_string(repo.read_text(path) or "")
+        values.extend(config.get(section, name, fallback="").splitlines())
+    return [str(v).strip() for v in values]
+
+
+@group.check(
+    'pytest turns warnings into errors: "error" in filterwarnings, or -W error.'
+)
+def warnings_as_errors(repo: Repo) -> Result:
+    if "error" in _pytest_option(repo, "filterwarnings"):
+        return passed()
+    w_error = re.compile(r"-W\s*error(?![\w:])")
+    if any(
+        w_error.search(s) for s in [*_pytest_option(repo, "addopts"), *repo.ci_strings]
+    ):
+        return passed()
+    return failed('no "error" in pytest filterwarnings, and no -W error')

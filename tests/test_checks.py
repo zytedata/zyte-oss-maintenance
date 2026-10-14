@@ -48,6 +48,9 @@ def test_facts() -> None:
         "Python versions of the latest PyPy release": "3.10, 3.11",
         "End-of-life PyPy Python versions": "3.9",
         "Latest sphinx-scrapy": "0.13.0",
+        "Minimum pre-commit hook versions, the newest releases at least 180 days old": (
+            "ruff 0.16.0, zizmor 1.1.0"
+        ),
     }
 
 
@@ -129,10 +132,22 @@ def test_latest_python(make_repo: MakeRepo) -> None:
               id-token: write
             jobs:
               publish:
+                environment: pypi
                 steps:
                 - uses: pypa/gh-action-pypi-publish@release/v1
             """,
             Status.PASS,
+        ),
+        (
+            """\
+            permissions:
+              id-token: write
+            jobs:
+              publish:
+                steps:
+                - uses: pypa/gh-action-pypi-publish@release/v1
+            """,
+            Status.FAIL,
         ),
         (
             """\
@@ -311,6 +326,8 @@ def test_tally() -> None:
         Result(Status.YES, value="MIT"),
     ]
     assert tally(CHECKS["license"], values) == "MIT (2), BSD-3-Clause (1), no (1)"
+    values = [Result(Status.YES, value="1.0"), Result(Status.YES, value="2.0")]
+    assert tally(CHECKS["latest-release"], [*values, Result(Status.NO)]) == "2/3 yes"
 
 
 @pytest.mark.parametrize(
@@ -691,3 +708,219 @@ def test_sphinx_scrapy_pins(make_repo: MakeRepo) -> None:
     result = run("sphinx-scrapy-latest", repo)
     assert result.status is Status.FAIL
     assert result.detail == "pinned to 0.8.4, latest is 0.13.0"
+
+
+@pytest.mark.parametrize(
+    ("files", "status"),
+    [
+        ({}, Status.NA),
+        ({"pyproject.toml": "[tool.ruff.lint]\nextend-select = ['B']\n"}, Status.PASS),
+        ({"ruff.toml": "[lint]\nselect = ['ALL']\n"}, Status.PASS),
+        (
+            {"pyproject.toml": "[tool.ruff.lint]\nselect = ['E4', 'E7', 'E9', 'F']\n"},
+            Status.FAIL,
+        ),
+        (
+            {
+                ".pre-commit-config.yaml": "repos:\n- repo: x\n  hooks:\n  - id: ruff-check\n"
+            },
+            Status.FAIL,
+        ),
+    ],
+)
+def test_ruff_rules(make_repo: MakeRepo, files: dict[str, str], status: Status) -> None:
+    assert run("ruff-rules", make_repo(files)).status is status
+
+
+@pytest.mark.parametrize(
+    ("files", "result"),
+    [
+        ({}, Result(Status.NA, "No .pre-commit-config.yaml.")),
+        (
+            {
+                ".github/workflows/ci.yml": "jobs: {c: {steps: [{uses: pre-commit/action@v3}]}}\n"
+            },
+            Result(Status.PASS),
+        ),
+        (
+            {
+                "tox.ini": "[testenv:lint]\ncommands = pre-commit run --all-files\n",
+                ".github/workflows/ci.yml": (
+                    "jobs: {c: {strategy: {matrix: {toxenv: [mypy, lint]}}}}\n"
+                ),
+            },
+            Result(Status.PASS),
+        ),
+        (
+            {
+                "tox.toml": '[env.pre-commit]\ncommands = [["pre-commit", "run"]]\n',
+                ".github/workflows/ci.yml": "jobs: {c: {steps: [{run: tox -e py}]}}\n",
+            },
+            Result(
+                Status.FAIL,
+                "tox environments that run pre-commit are not run in CI: pre-commit",
+            ),
+        ),
+        (
+            {".github/workflows/ci.yml": "jobs: {c: {steps: [{run: tox -e py}]}}\n"},
+            Result(Status.FAIL, "not run in CI workflows or tox"),
+        ),
+    ],
+)
+def test_pre_commit_in_ci(
+    make_repo: MakeRepo, files: dict[str, str], result: Result
+) -> None:
+    if files:
+        files[".pre-commit-config.yaml"] = "repos: []\n"
+    assert run("pre-commit-in-ci", make_repo(files)) == result
+
+
+def _pre_commit_config(*repos: tuple[str, str]) -> str:
+    return "repos:\n" + "".join(
+        f"- repo: {url}\n  rev: {rev}\n  hooks: []\n" for url, rev in repos
+    )
+
+
+def test_pre_commit_updates(make_repo: MakeRepo) -> None:
+    assert run("pre-commit-updates", make_repo({})).status is Status.NA
+    config = _pre_commit_config(
+        ("https://github.com/astral-sh/ruff-pre-commit", "v0.15.0"),
+        ("https://github.com/zizmorcore/zizmor-pre-commit.git", "v1.1.0"),
+        # Not checked.
+        ("https://github.com/rhysd/actionlint", "v0.1.0"),
+    )
+    result = run("pre-commit-updates", make_repo({".pre-commit-config.yaml": config}))
+    assert result == Result(
+        Status.FAIL, "outdated: ruff v0.15.0 (0.16.0 or later expected)"
+    )
+    config = _pre_commit_config(
+        # Frozen revs are not checked.
+        ("https://github.com/astral-sh/ruff-pre-commit", "0123abcd" * 5),
+        ("https://github.com/zizmorcore/zizmor-pre-commit", "v1.0.0"),
+    )
+    result = run("pre-commit-updates", make_repo({".pre-commit-config.yaml": config}))
+    assert result == Result(
+        Status.FAIL, "outdated: zizmor v1.0.0 (1.1.0 or later expected)"
+    )
+    config = _pre_commit_config(
+        ("https://github.com/astral-sh/ruff-pre-commit", "v0.16.1")
+    )
+    result = run("pre-commit-updates", make_repo({".pre-commit-config.yaml": config}))
+    assert result.status is Status.PASS
+    config = _pre_commit_config(("https://github.com/rhysd/actionlint", "v0.1.0"))
+    result = run("pre-commit-updates", make_repo({".pre-commit-config.yaml": config}))
+    assert result == Result(Status.NA, "No checked hooks.")
+
+
+def test_dependabot(make_repo: MakeRepo) -> None:
+    zizmor = "repos:\n- repo: x\n  hooks:\n  - id: zizmor\n"
+    files = {".pre-commit-config.yaml": zizmor}
+    assert run("dependabot", make_repo(files)).status is Status.NA
+    files[".github/workflows/ci.yml"] = "jobs: {}\n"
+    files[".pre-commit-config.yaml"] = "repos: []\n"
+    assert run("dependabot", make_repo(files)).status is Status.NA
+    files[".pre-commit-config.yaml"] = zizmor
+    assert run("dependabot", make_repo(files)) == Result(
+        Status.FAIL, "no .github/dependabot.yml"
+    )
+    files[".github/dependabot.yaml"] = "updates:\n- package-ecosystem: pip\n"
+    assert run("dependabot", make_repo(files)) == Result(
+        Status.FAIL, "no github-actions updates in .github/dependabot.yaml"
+    )
+    files[".github/dependabot.yaml"] += "- package-ecosystem: github-actions\n"
+    assert run("dependabot", make_repo(files)).status is Status.PASS
+
+
+@pytest.mark.parametrize(
+    ("files", "detail"),
+    [
+        ({"pyproject.toml": "[tool.coverage.run]\nbranch = true\n"}, ""),
+        (
+            {".coveragerc": "", "requirements-dev.txt": ""},
+            "legacy files: .coveragerc, requirements-dev.txt",
+        ),
+        (
+            {
+                "pyproject.toml": '[build-system]\nbuild-backend = "hatchling.build"\n',
+                "MANIFEST.in": "",
+            },
+            "MANIFEST.in, which hatchling.build ignores",
+        ),
+        (
+            {
+                "pyproject.toml": '[build-system]\nbuild-backend = "setuptools.build_meta"\n',
+                "MANIFEST.in": "",
+            },
+            "",
+        ),
+        (
+            {
+                "setup.cfg": "[metadata]\nname = x\n[flake8]\n[mypy-foo.*]\n",
+                "tox.ini": "[tox]\n[base]\n[testenv:min]\n[pytest]\n",
+            },
+            (
+                "tool sections in setup.cfg: [flake8], [mypy-foo.*]; "
+                "tool sections in tox.ini: [pytest]"
+            ),
+        ),
+    ],
+)
+def test_no_legacy_config(
+    make_repo: MakeRepo, files: dict[str, str], detail: str
+) -> None:
+    result = run("no-legacy-config", make_repo(files))
+    assert result == Result(Status.FAIL if detail else Status.PASS, detail)
+
+
+@pytest.mark.parametrize(
+    ("files", "status"),
+    [
+        (
+            {
+                "pyproject.toml": (
+                    "[tool.pytest.ini_options]\nfilterwarnings = ['error', 'ignore::X']\n"
+                )
+            },
+            Status.PASS,
+        ),
+        (
+            {"pyproject.toml": "[tool.pytest]\nfilterwarnings = ['error']\n"},
+            Status.PASS,
+        ),
+        (
+            {"pytest.ini": "[pytest]\nfilterwarnings =\n    error\n    ignore::X\n"},
+            Status.PASS,
+        ),
+        ({"tox.ini": "[testenv]\ncommands = pytest -W error {posargs}\n"}, Status.PASS),
+        (
+            {
+                "pyproject.toml": "[tool.pytest]\nfilterwarnings = ['error::DeprecationWarning']\n"
+            },
+            Status.FAIL,
+        ),
+        (
+            {"tox.ini": "[testenv]\ncommands = pytest -W error::UserWarning\n"},
+            Status.FAIL,
+        ),
+        ({}, Status.FAIL),
+    ],
+)
+def test_warnings_as_errors(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
+) -> None:
+    assert run("warnings-as-errors", make_repo(files)).status is status
+
+
+@pytest.mark.parametrize(
+    ("files", "value"),
+    [
+        ({"pyproject.toml": '[project]\nname = "example"\n'}, "1.1 (2026-03-04)"),
+        ({"setup.py": "setup(\n    name='example',\n)\n"}, "1.1 (2026-03-04)"),
+        ({"pyproject.toml": '[project]\nname = "unpublished"\n'}, ""),
+        ({}, ""),
+    ],
+)
+def test_latest_release(make_repo: MakeRepo, files: dict[str, str], value: str) -> None:
+    result = run("latest-release", make_repo(files))
+    assert result.value == value
+    assert result.status is (Status.YES if value else Status.NO)

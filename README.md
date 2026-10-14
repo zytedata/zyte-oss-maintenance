@@ -66,11 +66,12 @@ def mypy_strict(repo: Repo) -> Result:
 ```
 
 `Repo` gives access to the checkout (`read_text()`, `exists()`, `glob()`) and
-parsed metadata (`pyproject`, `project`, `requires_python`, `classifiers`,
-`has_sphinx_docs`, `supports_pypy`, `pre_commit_hooks`, `workflows`,
-`workflow_steps()`; `workflow_strings` and `tox_strings` with all strings from
-workflows and tox config, without comments; and `ci_python_versions` and
-`ci_pypy_versions` mentioned there).
+parsed metadata (`pyproject`, `project`, `dist_name`, `requires_python`,
+`classifiers`, `has_sphinx_docs`, `supports_pypy`, `pre_commit_hooks`,
+`workflows`, `workflow_steps()`; `workflow_strings` and `tox_strings` with all
+strings from workflows and tox config, without comments, and `tox_envs` with
+those of each tox environment; and `ci_python_versions` and `ci_pypy_versions`
+mentioned there).
 Return `failed()` with a short reason, `passed()` (optionally with a note worth
 reading), or `not_applicable()` with a reason, e.g. for docs checks on
 projects without docs. Exceptions are reported as check errors.
@@ -95,7 +96,9 @@ Python and PyPy version data (see `oss_maint/pythons.py`) comes from
 [python.org](https://www.python.org/api/v2/downloads/release/) (release
 candidates, and new releases that endoflife.date does not list yet) and
 [PyPy's `versions.json`](https://downloads.python.org/pypy/versions.json)
-(the Python versions of each PyPy release).
+(the Python versions of each PyPy release). Release data of projects and of
+the tools of pre-commit hooks (see `oss_maint/pypi.py`) comes from the
+[PyPI JSON API](https://docs.pypi.org/api/json/).
 
 ## Development
 

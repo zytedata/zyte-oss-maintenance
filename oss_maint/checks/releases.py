@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
+from oss_maint import pypi
 from oss_maint.core import Group, Repo, Result, failed, passed
 
 group = Group("releases", "Releases")
@@ -51,15 +52,25 @@ def _triggers(workflow: dict[Any, Any]) -> dict[str, Any]:
     return triggers
 
 
+@group.info("The latest release on PyPI, with its date.")
+def latest_release(repo: Repo) -> str | None:
+    if repo.dist_name is None or not (releases := pypi.releases(repo.dist_name)):
+        return None
+    return f"{releases[-1].version} ({releases[-1].uploaded.date()})"
+
+
 @group.check(
-    "Releases are published to PyPI from GitHub Actions through trusted publishing."
+    "Releases are published to PyPI from GitHub Actions through trusted publishing, "
+    "in a job with a GitHub environment."
 )
 def trusted_publishing(repo: Repo) -> Result:
     jobs = _publish_jobs(repo)
     if not jobs:
         return failed(NO_PUBLISHING)
     problems = []
-    for path, workflow, _, job in jobs:
+    for path, workflow, job_id, job in jobs:
+        if not job.get("environment"):
+            problems.append(f"{path}: job {job_id!r} has no environment")
         for step in job.get("steps") or []:
             if "twine upload" in step.get("run", ""):
                 problems.append(f"{path} publishes with twine upload")
