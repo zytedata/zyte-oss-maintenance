@@ -439,22 +439,66 @@ def test_twine_check(
 
 
 @pytest.mark.parametrize(
-    ("files", "mypy", "strict"),
+    ("files", "type_checker", "mypy", "pyrefly"),
     [
-        ({}, Status.FAIL, Status.NA),
+        ({}, Status.FAIL, Status.NO, Status.NO),
         (
             {"tox.ini": "[testenv:typing]\ncommands = mypy src\n"},
             Status.PASS,
-            Status.FAIL,
+            Status.YES,
+            Status.NO,
         ),
         (
-            {"tox.ini": "[testenv:typing]\ncommands = mypy --strict src\n"},
+            {"tox.toml": '[env.typing]\ncommands = [["pyrefly", "check"]]\n'},
             Status.PASS,
-            Status.PASS,
+            Status.NO,
+            Status.YES,
         ),
+        (
+            {
+                ".pre-commit-config.yaml": (
+                    "repos:\n- repo: x\n  hooks:\n  - id: pyrefly-check\n"
+                )
+            },
+            Status.PASS,
+            Status.NO,
+            Status.YES,
+        ),
+        (
+            {
+                "tox.ini": "[testenv:typing]\ncommands = mypy src\n",
+                ".github/workflows/ci.yml": (
+                    "jobs: {c: {steps: [{run: uvx pyrefly check}]}}\n"
+                ),
+            },
+            Status.PASS,
+            Status.YES,
+            Status.YES,
+        ),
+    ],
+)
+def test_type_checker(
+    make_repo: MakeRepo,
+    files: dict[str, str],
+    type_checker: Status,
+    mypy: Status,
+    pyrefly: Status,
+) -> None:
+    repo = make_repo(files)
+    assert run("type-checker", repo).status is type_checker
+    assert run("mypy", repo).status is mypy
+    assert run("pyrefly", repo).status is pyrefly
+
+
+@pytest.mark.parametrize(
+    ("files", "status"),
+    [
+        ({}, Status.NA),
+        ({"tox.toml": '[env.typing]\ncommands = [["pyrefly", "check"]]\n'}, Status.NA),
+        ({"tox.ini": "[testenv:typing]\ncommands = mypy src\n"}, Status.FAIL),
+        ({"tox.ini": "[testenv:typing]\ncommands = mypy --strict src\n"}, Status.PASS),
         (
             {"tox.toml": '[env.typing]\ncommands = [["mypy", "--strict", "src"]]\n'},
-            Status.PASS,
             Status.PASS,
         ),
         (
@@ -462,7 +506,6 @@ def test_twine_check(
                 "tox.ini": "[testenv:typing]\ncommands = mypy src\n",
                 "pyproject.toml": "[tool.mypy]\nstrict = true\n",
             },
-            Status.PASS,
             Status.PASS,
         ),
         (
@@ -472,16 +515,13 @@ def test_twine_check(
                 )
             },
             Status.PASS,
-            Status.PASS,
         ),
     ],
 )
-def test_mypy(
-    make_repo: MakeRepo, files: dict[str, str], mypy: Status, strict: Status
+def test_mypy_strict(
+    make_repo: MakeRepo, files: dict[str, str], status: Status
 ) -> None:
-    repo = make_repo(files)
-    assert run("mypy", repo).status is mypy
-    assert run("mypy-strict", repo).status is strict
+    assert run("mypy-strict", make_repo(files)).status is status
 
 
 @pytest.mark.parametrize(

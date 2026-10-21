@@ -6,7 +6,12 @@ from oss_maint.core import Group, Repo, Result, failed, not_applicable, passed
 
 group = Group("typing", "Typing", frozenset({"python"}))
 
-MYPY_RE = re.compile(r"\bmypy\b")
+# Type checkers: the regular expression that finds them in tox or CI
+# workflows, and their pre-commit hook ID.
+TYPE_CHECKERS = {
+    "mypy": (re.compile(r"\bmypy\b"), "mypy"),
+    "pyrefly": (re.compile(r"\bpyrefly\b"), "pyrefly-check"),
+}
 MYPY_STRICT_RE = re.compile(r"\bmypy\b.*\s--strict(?![\w-])")
 
 
@@ -36,20 +41,36 @@ def typed_classifier(repo: Repo) -> Result:
     return passed()
 
 
-def _runs_mypy(repo: Repo) -> bool:
-    return "mypy" in (repo.pre_commit_hook_ids or set()) or any(
-        MYPY_RE.search(s) for s in repo.ci_strings
+def _runs(repo: Repo, checker: str) -> bool:
+    regex, hook_id = TYPE_CHECKERS[checker]
+    return hook_id in (repo.pre_commit_hook_ids or set()) or any(
+        regex.search(s) for s in repo.ci_strings
     )
 
 
-@group.check("mypy runs in tox, CI workflows or pre-commit.")
-def mypy(repo: Repo) -> Result:
-    return passed() if _runs_mypy(repo) else failed("mypy not found")
+@group.check(
+    f"A type checker ({' or '.join(TYPE_CHECKERS)}) runs in tox, CI workflows or "
+    "pre-commit."
+)
+def type_checker(repo: Repo) -> Result:
+    if any(_runs(repo, checker) for checker in TYPE_CHECKERS):
+        return passed()
+    return failed("no type checker found")
+
+
+@group.info("mypy runs in tox, CI workflows or pre-commit.")
+def mypy(repo: Repo) -> bool:
+    return _runs(repo, "mypy")
+
+
+@group.info("pyrefly runs in tox, CI workflows or pre-commit.")
+def pyrefly(repo: Repo) -> bool:
+    return _runs(repo, "pyrefly")
 
 
 @group.check("mypy runs in strict mode: strict = true in its config, or --strict.")
 def mypy_strict(repo: Repo) -> Result:
-    if not _runs_mypy(repo):
+    if not _runs(repo, "mypy"):
         return not_applicable("Does not run mypy.")
     mypy_config = (repo.pyproject or {}).get("tool", {}).get("mypy", {})
     if mypy_config.get("strict"):
