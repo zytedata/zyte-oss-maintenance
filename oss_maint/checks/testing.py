@@ -40,6 +40,79 @@ def codecov_test_results(repo: Repo) -> Result:
     return failed("no codecov/codecov-action step with report_type: test_results")
 
 
+# Organizations where Codecov does not allow tokenless uploads, which use OIDC
+# instead of a token secret.
+CODECOV_OIDC_ORGS = frozenset({"scrapinghub"})
+
+
+def _env(data: dict[str, Any]) -> dict[str, Any]:
+    """The env of a workflow, job or step, empty if it is an expression."""
+    env = data.get("env")
+    return env if isinstance(env, dict) else {}
+
+
+def _codecov_auth(
+    workflow: dict[Any, Any], job: dict[str, Any], step: dict[str, Any]
+) -> str | None:
+    """How *step* authenticates to Codecov: "OIDC", "token" or "tokenless",
+    or None if it does not upload to Codecov. Steps that run commands only
+    count with a token, as they may only install codecov."""
+    token = {**_env(workflow), **_env(job), **_env(step)}.get("CODECOV_TOKEN")
+    if step.get("uses", "").startswith("codecov/codecov-action@"):
+        with_ = step.get("with") or {}
+        if str(with_.get("use_oidc")).lower() == "true":
+            return "OIDC"
+        return "token" if with_.get("token") or token else "tokenless"
+    run = step.get("run", "")
+    if "codecov" in run and (token or "CODECOV_TOKEN" in run):
+        return "token"
+    return None
+
+
+def _id_token_write(workflow: dict[Any, Any], job: dict[str, Any]) -> bool:
+    # Job permissions replace those of the workflow.
+    permissions = job.get("permissions", workflow.get("permissions"))
+    if permissions == "write-all":
+        return True
+    return isinstance(permissions, dict) and permissions.get("id-token") == "write"
+
+
+@group.check(
+    "Codecov uploads use OIDC (use_oidc: true, with id-token: write permission) "
+    f"in {', '.join(sorted(CODECOV_OIDC_ORGS))}, where tokenless uploads are not "
+    "allowed, and are tokenless elsewhere."
+)
+def codecov_auth(repo: Repo) -> Result:
+    expected = "OIDC" if repo.name.split("/")[0] in CODECOV_OIDC_ORGS else "tokenless"
+    auths: dict[str, set[str]] = {}
+    no_id_token = set()
+    for path, workflow in repo.workflows.items():
+        for job in (workflow.get("jobs") or {}).values():
+            for step in job.get("steps") or []:
+                auth = _codecov_auth(workflow, job, step)
+                if auth is None:
+                    continue
+                auths.setdefault(auth, set()).add(path)
+                if auth == "OIDC" and not _id_token_write(workflow, job):
+                    no_id_token.add(path)
+    if not auths:
+        return not_applicable("Nothing is uploaded to Codecov.")
+    problems = []
+    if wrong := [
+        f"{auth} in {', '.join(sorted(paths))}"
+        for auth, paths in sorted(auths.items())
+        if auth != expected
+    ]:
+        problems.append(f"expected {expected}, found {' and '.join(wrong)}")
+    if no_id_token:
+        problems.append(
+            f"no id-token: write for OIDC in {', '.join(sorted(no_id_token))}"
+        )
+    if problems:
+        return failed("; ".join(problems))
+    return passed()
+
+
 CODECOV_CONFIGS = [
     f"{d}{n}.{e}"
     for d in ("", ".github/")

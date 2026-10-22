@@ -564,6 +564,138 @@ def test_codecov(make_repo: MakeRepo) -> None:
     assert run("codecov", repo).status is Status.PASS
 
 
+@pytest.mark.parametrize(
+    ("owner", "workflow", "result"),
+    [
+        (
+            "owner",
+            "jobs:\n  test:\n    steps:\n    - run: pip install codecov\n",
+            Result(Status.NA, "Nothing is uploaded to Codecov."),
+        ),
+        (
+            "owner",
+            "jobs:\n  test:\n    steps:\n    - uses: codecov/codecov-action@v5\n",
+            Result(Status.PASS),
+        ),
+        (
+            "scrapinghub",
+            "jobs:\n  test:\n    steps:\n    - uses: codecov/codecov-action@v5\n",
+            Result(
+                Status.FAIL,
+                "expected OIDC, found tokenless in .github/workflows/test.yml",
+            ),
+        ),
+        (
+            "owner",
+            """\
+            jobs:
+              test:
+                steps:
+                - uses: codecov/codecov-action@v5
+                  with:
+                    token: ${{ secrets.CODECOV_TOKEN }}
+                - uses: codecov/codecov-action@v5
+                  with:
+                    report_type: test_results
+            """,
+            Result(
+                Status.FAIL,
+                "expected tokenless, found token in .github/workflows/test.yml",
+            ),
+        ),
+        (
+            "owner",
+            """\
+            env:
+              CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+            jobs:
+              test:
+                steps:
+                - uses: codecov/codecov-action@v5
+            """,
+            Result(
+                Status.FAIL,
+                "expected tokenless, found token in .github/workflows/test.yml",
+            ),
+        ),
+        (
+            "owner",
+            """\
+            jobs:
+              test:
+                steps:
+                - run: ./codecov
+                  env:
+                    CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+            """,
+            Result(
+                Status.FAIL,
+                "expected tokenless, found token in .github/workflows/test.yml",
+            ),
+        ),
+        (
+            "scrapinghub",
+            """\
+            permissions:
+              contents: read
+            jobs:
+              test:
+                permissions:
+                  contents: read
+                  id-token: write
+                steps:
+                - uses: codecov/codecov-action@v5
+                  with:
+                    use_oidc: true
+            """,
+            Result(Status.PASS),
+        ),
+        (
+            "scrapinghub",
+            """\
+            permissions:
+              id-token: write
+            jobs:
+              test:
+                permissions:
+                  contents: read
+                steps:
+                - uses: codecov/codecov-action@v5
+                  with:
+                    use_oidc: true
+            """,
+            Result(
+                Status.FAIL,
+                "no id-token: write for OIDC in .github/workflows/test.yml",
+            ),
+        ),
+        (
+            "owner",
+            """\
+            permissions:
+              id-token: write
+            jobs:
+              test:
+                steps:
+                - uses: codecov/codecov-action@v5
+                  with:
+                    use_oidc: true
+            """,
+            Result(
+                Status.FAIL,
+                "expected tokenless, found OIDC in .github/workflows/test.yml",
+            ),
+        ),
+    ],
+)
+def test_codecov_auth(
+    make_repo: MakeRepo, owner: str, workflow: str, result: Result
+) -> None:
+    repo = make_repo({".github/workflows/test.yml": workflow})
+    repo = Repo(f"{owner}/name", repo.path)
+    assert run("codecov-auth", repo) == result
+
+
 CODECOV_WORKFLOW = "jobs:\n  test:\n    steps:\n    - run: codecov\n"
 
 
