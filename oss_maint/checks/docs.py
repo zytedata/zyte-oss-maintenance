@@ -32,9 +32,7 @@ def latest_sphinx_scrapy_version() -> str:
 
 
 def _uses_sphinx_scrapy(repo: Repo) -> bool:
-    return "sphinx_scrapy" in (
-        repo.read_text("docs/conf.py") or ""
-    ) or "sphinx-scrapy" in (repo.read_text("docs/requirements.in") or "")
+    return "sphinx_scrapy" in (repo.read_text("docs/conf.py") or "")
 
 
 def _pin(texts: list[str]) -> str | None:
@@ -54,7 +52,6 @@ def _sphinx_scrapy_pins(repo: Repo) -> dict[str, str | None]:
             rev = str(pre_commit_repo.get("rev"))
     return {
         "tox": _pin(repo.tox_strings),
-        "docs/requirements.in": _pin([repo.read_text("docs/requirements.in") or ""]),
         ".pre-commit-config.yaml": rev,
     }
 
@@ -91,12 +88,19 @@ def no_wiki(repo: Repo) -> Result:
     return passed()
 
 
-@group.check("Sphinx docs requirements are defined in docs/requirements.in.")
-def docs_requirements_in(repo: Repo) -> Result:
+@group.check(
+    "Sphinx docs requirements other than sphinx-scrapy are in a docs dependency "
+    "group, not in docs/requirements.in or docs/requirements.txt."
+)
+def no_docs_requirements(repo: Repo) -> Result:
     if not repo.has_sphinx_docs:
         return not_applicable("No Sphinx docs.")
-    if not repo.exists("docs/requirements.in"):
-        return failed("no docs/requirements.in")
+    if files := [
+        path
+        for path in ("docs/requirements.in", "docs/requirements.txt")
+        if repo.exists(path)
+    ]:
+        return failed(f"found {', '.join(files)}")
     return passed()
 
 
@@ -105,13 +109,13 @@ def sphinx_scrapy(repo: Repo) -> Result:
     if not repo.has_sphinx_docs:
         return not_applicable("No Sphinx docs.")
     if not _uses_sphinx_scrapy(repo):
-        return failed("sphinx_scrapy not in docs/conf.py or docs/requirements.in")
+        return failed("sphinx_scrapy not in docs/conf.py")
     return passed()
 
 
 @group.check(
-    "sphinx-scrapy is pinned to the same version in the tox requires, the docs "
-    "requirements and the pre-commit hook rev."
+    "sphinx-scrapy is pinned to the same version in the tox requires and the "
+    "pre-commit hook rev."
 )
 def sphinx_scrapy_pins(repo: Repo) -> Result:
     if not repo.has_sphinx_docs or not _uses_sphinx_scrapy(repo):
