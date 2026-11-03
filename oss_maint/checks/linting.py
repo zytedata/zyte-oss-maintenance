@@ -288,6 +288,58 @@ def workflow_concurrency(repo: Repo) -> Result:
     return passed()
 
 
+GOVERNANCE_WORKFLOW = re.compile(r"[^/]+/governance/\.github/workflows/")
+
+
+def _is_governance_workflow(workflow: dict[Any, Any]) -> bool:
+    """Whether *workflow* only calls reusable workflows of an org's governance
+    repo, which publishes it to every repo and decides its triggers, e.g.
+    secret scanning on every push."""
+    jobs = (workflow.get("jobs") or {}).values()
+    return bool(jobs) and all(
+        GOVERNANCE_WORKFLOW.match(str(job.get("uses", ""))) for job in jobs
+    )
+
+
+def _pushes_to_any_branch(workflow: dict[Any, Any]) -> bool:
+    if _is_governance_workflow(workflow):
+        return False
+    triggers = workflow_triggers(workflow)
+    if "push" not in triggers:
+        return False
+    push = triggers["push"] or {}
+    if "branches-ignore" in push:
+        return True
+    if "branches" not in push:
+        # Push filters on tags alone exclude branches.
+        return not ({"tags", "tags-ignore"} & push.keys())
+    patterns = push["branches"]
+    if isinstance(patterns, str):
+        patterns = [patterns]
+    # "*" matches every branch without a slash, "**" every branch.
+    return any(not str(p).startswith("!") and not str(p).strip("*") for p in patterns)
+
+
+@group.check(
+    "Workflows triggered by pull requests run on pushes only to specific branches "
+    "(e.g. the default one), so pull requests from branches of the repository run "
+    "them once, on their merge into the base branch."
+)
+def workflow_push_branches(repo: Repo) -> Result:
+    workflows = {
+        path: workflow
+        for path, workflow in repo.workflows.items()
+        if "pull_request" in workflow_triggers(workflow)
+    }
+    if not workflows:
+        return not_applicable("No workflows triggered by pull requests.")
+    if unrestricted := [
+        path for path, workflow in workflows.items() if _pushes_to_any_branch(workflow)
+    ]:
+        return failed(f"runs on pushes to any branch: {', '.join(unrestricted)}")
+    return passed()
+
+
 PR_GUARD_ACTION = "scrapy/unattended-pr-guard@"
 
 
