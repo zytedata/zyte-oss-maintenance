@@ -1122,6 +1122,52 @@ def test_workflow_concurrency(
 
 
 @pytest.mark.parametrize(
+    ("workflow", "status"),
+    [
+        ("on: release\n", Status.NA),
+        ("on: [push]\n", Status.NA),
+        ("on: [push, pull_request]\n", Status.FAIL),
+        ("on:\n  push:\n  pull_request:\n", Status.FAIL),
+        ("on:\n  push:\n    paths: [src/**]\n  pull_request:\n", Status.FAIL),
+        ("on:\n  push:\n    branches-ignore: [main]\n  pull_request:\n", Status.FAIL),
+        ("on:\n  push:\n    branches: ['**', '!main']\n  pull_request:\n", Status.FAIL),
+        ("on:\n  push:\n    branches: '*'\n  pull_request:\n", Status.FAIL),
+        ("on: [pull_request, workflow_dispatch]\n", Status.PASS),
+        ("on:\n  push:\n    tags: [v*]\n  pull_request:\n", Status.PASS),
+        (
+            "on:\n  push:\n    branches: [main, '[0-9]+.[0-9]+']\n  pull_request:\n",
+            Status.PASS,
+        ),
+        (
+            (
+                "on: [push, pull_request]\njobs:\n  secrets:\n"
+                "    uses: org/governance/.github/workflows/secrets.yml@main\n"
+            ),
+            Status.PASS,
+        ),
+        (
+            (
+                "on: [push, pull_request]\njobs:\n  secrets:\n"
+                "    uses: org/governance/.github/workflows/secrets.yml@main\n"
+                "  tests:\n    runs-on: ubuntu-latest\n"
+            ),
+            Status.FAIL,
+        ),
+    ],
+)
+def test_workflow_push_branches(
+    make_repo: MakeRepo, workflow: str, status: Status
+) -> None:
+    repo = make_repo({".github/workflows/ci.yml": workflow})
+    result = run("workflow-push-branches", repo)
+    assert result.status is status
+    if status is Status.FAIL:
+        assert result.detail == (
+            "runs on pushes to any branch: .github/workflows/ci.yml"
+        )
+
+
+@pytest.mark.parametrize(
     ("files", "detail"),
     [
         ({"pyproject.toml": "[tool.coverage.run]\nbranch = true\n"}, ""),
