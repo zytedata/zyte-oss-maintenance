@@ -1,14 +1,14 @@
 # Maintenance report by project
 
-Generated on 2026-11-04 with `oss-maint report`. Do not edit by hand. Lists failing checks and notes for each project; see [REPORT.md](REPORT.md) for all results.
+Generated on 2026-11-09 with `oss-maint report`. Do not edit by hand. Lists failing checks and notes for each project; see [REPORT.md](REPORT.md) for all results.
 
 ## Scrapy and its deps
 
 ### scrapy/scrapy
 
-[Repository](https://github.com/scrapy/scrapy) · commit [`20df334`](https://github.com/scrapy/scrapy/commit/20df334115ca4d8a3fe246ac644049ca18749026) · 43/50 checks passing
+[Repository](https://github.com/scrapy/scrapy) · commit [`1bc0473`](https://github.com/scrapy/scrapy/commit/1bc0473909e4e5a3d0b62710715b6383c5641765) · 45/50 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: yes · has-sphinx-docs: yes · latest-release: 2.19.0 (2026-09-10) · unreleased-changes: yes
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: yes · has-sphinx-docs: yes · latest-release: 2.20.0 (2026-11-06) · unreleased-changes: yes
 
 **Dependencies**
 
@@ -26,8 +26,6 @@ supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint
 **Documentation**
 
 - ❌ [`no-wiki`](REPORT.md#no-wiki): https://github.com/scrapy/scrapy/wiki has pages
-- ❌ [`no-docs-requirements`](REPORT.md#no-docs-requirements): found docs/requirements.in, docs/requirements.txt
-- ❌ [`sphinx-scrapy-latest`](REPORT.md#sphinx-scrapy-latest): pinned to 0.13.0, latest is 0.15.0
 
 ### scrapy/cssselect
 
@@ -230,13 +228,9 @@ supports-pypy: yes · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylin
 
 ### scrapy/w3lib
 
-[Repository](https://github.com/scrapy/w3lib) · commit [`95071f4`](https://github.com/scrapy/w3lib/commit/95071f4f8c6186aee3865829c68dc18eb787075c) · 39/49 checks passing
+[Repository](https://github.com/scrapy/w3lib) · commit [`65b7cdf`](https://github.com/scrapy/w3lib/commit/65b7cdfa3bfaad7d4721e55216e1bf4bf940d5cf) · 40/49 checks passing
 
-supports-pypy: yes · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: yes · has-sphinx-docs: yes · latest-release: 2.5.0 (2026-09-30) · unreleased-changes: yes
-
-**Python versions**
-
-- ❌ [`latest-pypy`](REPORT.md#latest-pypy): PyPy 3.12 not found in CI workflows or tox config
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: yes · has-sphinx-docs: yes · latest-release: 2.6.0 (2026-11-05) · unreleased-changes: no
 
 **Typing**
 
@@ -299,9 +293,9 @@ supports-pypy: yes · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylin
 
 ### scrapy-plugins/scrapy-download-handlers-incubator
 
-[Repository](https://github.com/scrapy-plugins/scrapy-download-handlers-incubator) · commit [`cdc16c2`](https://github.com/scrapy-plugins/scrapy-download-handlers-incubator/commit/cdc16c26768255f8dbb302dbf3b388cdb0d62b3e) · 39/43 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-download-handlers-incubator) · commit [`ea6e097`](https://github.com/scrapy-plugins/scrapy-download-handlers-incubator/commit/ea6e097b7474d2a254adc778d4bf7c45d3b2d385) · 39/43 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.7.0 (2026-10-26) · unreleased-changes: yes
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.7.1 (2026-11-07) · unreleased-changes: yes
 
 **Tests and coverage**
 
@@ -972,14 +966,9 @@ supports-pypy: no · license: BSD License · mypy: no · pyrefly: no · pylint: 
 
 ### scrapinghub/scrapy-poet
 
-[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`7ec78c3`](https://github.com/scrapinghub/scrapy-poet/commit/7ec78c35019f1f216923e7b9ff250826bffcccd0) · 36/50 checks passing
+[Repository](https://github.com/scrapinghub/scrapy-poet) · commit [`c54e48e`](https://github.com/scrapinghub/scrapy-poet/commit/c54e48e7c4332529436667cc79448509ab4beb61) · 38/50 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.27.2 (2026-04-28) · unreleased-changes: yes
-
-**Python versions**
-
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.28.0 (2026-11-06) · unreleased-changes: no
 
 **Packaging**
 
@@ -1045,15 +1034,9 @@ supports-pypy: no · license: Apache-2.0 · mypy: yes · pyrefly: no · pylint: 
 
 ### scrapinghub/web-poet
 
-[Repository](https://github.com/scrapinghub/web-poet) · commit [`599e041`](https://github.com/scrapinghub/web-poet/commit/599e04110b617531a32884d439a5666126344fdd) · 32/50 checks passing
+[Repository](https://github.com/scrapinghub/web-poet) · commit [`b5391e6`](https://github.com/scrapinghub/web-poet/commit/b5391e6bc6189e37b5d735b9aa99a5712fc3218d) · 35/50 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.24.1 (2026-04-28) · unreleased-changes: yes
-
-**Python versions**
-
-- ❌ [`no-eol-python`](REPORT.md#no-eol-python): requires-python '>=3.10' allows 3.10 (EOL 2026-10-01); classifiers list 3.10
-- ❌ [`latest-python`](REPORT.md#latest-python): no 'Programming Language :: Python :: 3.15' classifier; 3.15 not found in CI workflows or tox config
-- ❌ [`python-classifiers`](REPORT.md#python-classifiers): no classifiers for 3.15
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.25.0 (2026-11-06) · unreleased-changes: no
 
 **Packaging**
 
@@ -1116,9 +1099,9 @@ supports-pypy: no · license: Apache-2.0 · mypy: yes · pyrefly: no · pylint: 
 
 ### scrapy/frostwork
 
-[Repository](https://github.com/scrapy/frostwork) · commit [`68927e9`](https://github.com/scrapy/frostwork/commit/68927e9b2c5614e40d2085de5189f880db8f6433) · 19/35 checks passing
+[Repository](https://github.com/scrapy/frostwork) · commit [`cd7c7be`](https://github.com/scrapy/frostwork/commit/cd7c7be7a91f77879a5c0978e84905a0b47e165e) · 19/35 checks passing
 
-supports-pypy: no · license: Apache-2.0 · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.1.6 (2026-09-23) · unreleased-changes: yes
+supports-pypy: no · license: Apache-2.0 · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.2.2 (2026-11-05) · unreleased-changes: no
 
 **Python versions**
 
@@ -1158,9 +1141,9 @@ supports-pypy: no · license: Apache-2.0 · pyrefly: no · pylint: no · has-sph
 
 ### scrapy-plugins/scrapy-zyte-api
 
-[Repository](https://github.com/scrapy-plugins/scrapy-zyte-api) · commit [`cca7d8a`](https://github.com/scrapy-plugins/scrapy-zyte-api/commit/cca7d8af5edb65e77a2384591b3174b72f2b177c) · 40/51 checks passing
+[Repository](https://github.com/scrapy-plugins/scrapy-zyte-api) · commit [`8fcb617`](https://github.com/scrapy-plugins/scrapy-zyte-api/commit/8fcb6177a0ccda18ce12f6e198ed7141ed2f2cdd) · 40/51 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.36.0 (2026-08-20) · unreleased-changes: yes
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.37.0 (2026-11-06) · unreleased-changes: no
 
 **Packaging**
 
@@ -1479,9 +1462,9 @@ supports-pypy: no · license: BSD License · mypy: no · pyrefly: no · pylint: 
 
 ### scrapinghub/shub-workflow
 
-[Repository](https://github.com/scrapinghub/shub-workflow) · commit [`34d6a61`](https://github.com/scrapinghub/shub-workflow/commit/34d6a61e33920450519a1a7ca06a8bcbf53922c3) · 3/28 checks passing
+[Repository](https://github.com/scrapinghub/shub-workflow) · commit [`7d6bb9a`](https://github.com/scrapinghub/shub-workflow/commit/7d6bb9a2602b3f6e7a6f5060b8d1a0b104e3086e) · 3/28 checks passing
 
-supports-pypy: no · license: Apache Software License · mypy: no · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 1.14.47 (2026-11-03) · unreleased-changes: yes
+supports-pypy: no · license: Apache Software License · mypy: no · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 1.14.48.1 (2026-11-06) · unreleased-changes: no
 
 **Python versions**
 
@@ -1764,7 +1747,7 @@ supports-pypy: no · license: Apache-2.0 · mypy: yes · pyrefly: no · pylint: 
 
 ### zytedata/html-text
 
-[Repository](https://github.com/zytedata/html-text) · commit [`3955be2`](https://github.com/zytedata/html-text/commit/3955be2f85381e7198bdd99f5e9ce903786c7a9e) · 28/41 checks passing
+[Repository](https://github.com/zytedata/html-text) · commit [`0afbda2`](https://github.com/zytedata/html-text/commit/0afbda25e4a0b6295823a96dd3613bf8501ce363) · 28/41 checks passing
 
 supports-pypy: no · license: MIT · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.7.1 (2025-10-06) · unreleased-changes: yes
 
@@ -1850,9 +1833,9 @@ supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint
 
 ### scrapinghub/dateparser
 
-[Repository](https://github.com/scrapinghub/dateparser) · commit [`66d5783`](https://github.com/scrapinghub/dateparser/commit/66d5783d8ff791b40d296ddf991066e6a083c3cd) · 24/47 checks passing
+[Repository](https://github.com/scrapinghub/dateparser) · commit [`90544c0`](https://github.com/scrapinghub/dateparser/commit/90544c0b0955e2c479e15cabecb8e7a1448b0476) · 25/47 checks passing
 
-supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 1.4.3 (2026-09-03) · unreleased-changes: yes
+supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 1.5.0 (2026-11-04) · unreleased-changes: yes
 
 **Python versions**
 
@@ -1863,7 +1846,6 @@ supports-pypy: no · license: BSD-3-Clause · mypy: yes · pyrefly: no · pylint
 **Packaging**
 
 - ❌ [`pyproject-metadata`](REPORT.md#pyproject-metadata): setup.py exists
-- ❌ [`no-legacy-config`](REPORT.md#no-legacy-config): legacy files: .coveragerc, pytest.ini
 - ❌ [`hatchling`](REPORT.md#hatchling): build backend is setuptools.build_meta
 - ❌ [`project-urls`](REPORT.md#project-urls): missing URLs: issues, documentation
 
@@ -2349,7 +2331,7 @@ supports-pypy: no · license: Apache-2.0 · mypy: yes · pyrefly: no · pylint: 
 
 ### zytedata/agent-exam
 
-[Repository](https://github.com/zytedata/agent-exam) · commit [`e25c638`](https://github.com/zytedata/agent-exam/commit/e25c6380c59e5386caa7085795af12d2dbd2931c) · 31/48 checks passing
+[Repository](https://github.com/zytedata/agent-exam) · commit [`b57771e`](https://github.com/zytedata/agent-exam/commit/b57771ed7b79f24d5be7cccc2de89893d5e2131e) · 31/48 checks passing
 
 supports-pypy: no · license: Apache-2.0 · mypy: no · pyrefly: no · pylint: no · has-sphinx-docs: yes · latest-release: 0.3.0 (2026-10-20) · unreleased-changes: yes
 
@@ -2439,7 +2421,7 @@ supports-pypy: no · license: Apache-2.0 · mypy: no · pyrefly: no · pylint: n
 
 ### zytedata/harness-run
 
-[Repository](https://github.com/zytedata/harness-run) · commit [`cc11c24`](https://github.com/zytedata/harness-run/commit/cc11c24d5494bdca045f3cf0f08d5d119918b77e) · 12/32 checks passing
+[Repository](https://github.com/zytedata/harness-run) · commit [`8e1e2e0`](https://github.com/zytedata/harness-run/commit/8e1e2e06c900c40416e576747bd0763b2879a4ed) · 12/32 checks passing
 
 supports-pypy: no · license: Apache-2.0 · mypy: no · pyrefly: no · pylint: no · has-sphinx-docs: no · latest-release: 0.4.0 (2026-09-23) · unreleased-changes: yes
 
@@ -2598,7 +2580,7 @@ has-sphinx-docs: no
 
 ### zytedata/zyte-oss-maintenance
 
-[Repository](https://github.com/zytedata/zyte-oss-maintenance) · commit [`bc264e6`](https://github.com/zytedata/zyte-oss-maintenance/commit/bc264e640b3d5be9c6656f9cce3c2ad928df7d33) · 17/24 checks passing
+[Repository](https://github.com/zytedata/zyte-oss-maintenance) · commit [`d4d05af`](https://github.com/zytedata/zyte-oss-maintenance/commit/d4d05afd23e4a1771e4056941834d6a1d627af71) · 17/24 checks passing
 
 supports-pypy: no · license: Apache-2.0 · mypy: no · pyrefly: yes · pylint: no · has-sphinx-docs: no
 
